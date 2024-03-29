@@ -203,7 +203,7 @@ struct Player {
         long basePointer = base;
         int settingIndex = 65;
         std::array<unsigned char, 4> highlightFunctionBits = {
-            0,   // InsideFunction
+            2,   // InsideFunction
             125, // OutlineFunction: HIGHLIGHT_OUTLINE_OBJECTIVE
             64,  // OutlineRadius: size * 255 / 8
             64   // (EntityVisible << 6) | State & 0x3F | (AfterPostProcess << 7)
