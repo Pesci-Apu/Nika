@@ -1,41 +1,41 @@
 #pragma once
-constexpr int WEAPON_HANDS = 115;
+constexpr int WEAPON_HANDS = 116;
 //Sniper ammo weapons
 constexpr int WEAPON_SENTINEL = 1;
-constexpr int WEAPON_CHARGE_RIFLE = 83;
-constexpr int WEAPON_LONGBOW = 85;
+constexpr int WEAPON_CHARGE_RIFLE = 84;
+constexpr int WEAPON_LONGBOW = 86;
 //Shotgun ammo weapons
-constexpr int WEAPON_MOZAMBIQUE = 97;
-constexpr int WEAPON_EVA8 = 88;
-constexpr int WEAPON_PEACEKEEPER = 104;
-constexpr int WEAPON_MASTIFF = 96;
+constexpr int WEAPON_MOZAMBIQUE = 98;
+constexpr int WEAPON_EVA8 = 89;
+constexpr int WEAPON_PEACEKEEPER = 105;
+constexpr int WEAPON_MASTIFF = 97;
 //Light ammo weapons
-constexpr int WEAPON_P2020 = 106;
-constexpr int WEAPON_RE45 = 81;
-constexpr int WEAPON_ALTERNATOR = 80;
-constexpr int WEAPON_R99 = 105;
+constexpr int WEAPON_P2020 = 107;
+constexpr int WEAPON_RE45 = 82;
+constexpr int WEAPON_ALTERNATOR = 81;
+constexpr int WEAPON_R99 = 106;
 constexpr int WEAPON_R301 = 0;
-constexpr int WEAPON_SPITFIRE = 107;
-constexpr int WEAPON_G7 = 90;
+constexpr int WEAPON_SPITFIRE = 108;
+constexpr int WEAPON_G7 = 91;
 //Heavy ammo weapons
-constexpr int WEAPON_CAR = 113;
-constexpr int WEAPON_RAMPAGE = 21;
-constexpr int WEAPON_3030 = 112;
-constexpr int WEAPON_HEMLOCK = 91;
-constexpr int WEAPON_FLATLINE = 89;
+constexpr int WEAPON_CAR = 114;
+constexpr int WEAPON_RAMPAGE = 6;
+constexpr int WEAPON_3030 = 113;
+constexpr int WEAPON_HEMLOCK = 92;
+constexpr int WEAPON_FLATLINE = 90;
+constexpr int WEAPON_PROWLER = 103;
 //Energy ammo weapons
-constexpr int WEAPON_NEMESIS = 114;
-constexpr int WEAPON_VOLT = 111;
-constexpr int WEAPON_TRIPLE_TAKE = 108;
-constexpr int WEAPON_LSTAR = 94;
-constexpr int WEAPON_DEVOTION = 84;
-constexpr int WEAPON_HAVOC = 86;
+constexpr int WEAPON_NEMESIS = 115;
+constexpr int WEAPON_VOLT = 112;
+constexpr int WEAPON_TRIPLE_TAKE = 109;
+constexpr int WEAPON_LSTAR = 95;
+constexpr int WEAPON_DEVOTION = 85;
+constexpr int WEAPON_HAVOC = 87;
 //Legendary ammo weapons
-constexpr int WEAPON_WINGMAN = 110; 
-constexpr int WEAPON_PROWLER = 102;
+constexpr int WEAPON_WINGMAN = 111; 
 constexpr int WEAPON_BOCEK = 2;
-constexpr int WEAPON_KRABER = 93;
-constexpr int WEAPON_THROWING_KNIFE = 166;
+constexpr int WEAPON_KRABER = 94;
+constexpr int WEAPON_THROWING_KNIFE = 169;
 constexpr int WEAPON_THERMITE_GRENADE = 164;
 
 // Define a reverse mapping from integer values to string names
@@ -80,5 +80,3 @@ std::string WeaponName(int weaponId) {
         return it->second;
     return "UNKNOWN! NEED WEAPONID UPDATE!?";
 }
-
-
