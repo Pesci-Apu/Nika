@@ -12,7 +12,6 @@ struct ConfigLoader {
     bool FEATURE_AIMBOT_ON = true;
     bool FEATURE_SENSE_ON = true;
     bool FEATURE_ITEM_GLOW_ON = true;
-    bool FEATURE_WEAPON_CHAMS_ON = true;
     bool FEATURE_SPECTATOR_ON = true;
     bool FEATURE_QUICKTURN_ON = true;
     bool FEATURE_SKINCHANGER_ON = true;
@@ -21,7 +20,6 @@ struct ConfigLoader {
     bool FEATURE_PRINT_LEVELS_ON = true;
     bool FEATURE_SUPER_GLIDE_ON = true;
     bool FEATURE_MAP_RADAR_ON = true;
-    int  WEAPON_CHAMS_COLOR = 1;
 
     //norecoil    
     int NORECOIL_PITCH_REDUCTION = 15;
@@ -54,11 +52,9 @@ struct ConfigLoader {
         FEATURE_AIMBOT_ON = (key.compare("FEATURE_AIMBOT_ON") != 0) ? FEATURE_AIMBOT_ON : toBool(val);
         FEATURE_SENSE_ON = (key.compare("FEATURE_SENSE_ON") != 0) ? FEATURE_SENSE_ON : toBool(val);
         FEATURE_ITEM_GLOW_ON = (key.compare("FEATURE_ITEM_GLOW_ON") != 0) ? FEATURE_ITEM_GLOW_ON : toBool(val);
-        FEATURE_WEAPON_CHAMS_ON = (key.compare("FEATURE_WEAPON_CHAMS_ON") != 0) ? FEATURE_WEAPON_CHAMS_ON : toBool(val);
         FEATURE_TRIGGERBOT_ON = (key.compare("FEATURE_TRIGGERBOT_ON") != 0) ? FEATURE_TRIGGERBOT_ON : toBool(val);
         FEATURE_NORECOIL_ON = (key.compare("FEATURE_NORECOIL_ON") != 0) ? FEATURE_NORECOIL_ON : toBool(val);
-        WEAPON_CHAMS_COLOR = (key.compare("WEAPON_CHAMS_COLOR") != 0) ? WEAPON_CHAMS_COLOR : stoi(val);
-       
+        
         //norecoil        
         NORECOIL_PITCH_REDUCTION = (key.compare("NORECOIL_PITCH_REDUCTION") != 0) ? NORECOIL_PITCH_REDUCTION : stoi(val);
         NORECOIL_YAW_REDUCTION = (key.compare("NORECOIL_YAW_REDUCTION") != 0) ? NORECOIL_YAW_REDUCTION : stoi(val);
@@ -97,7 +93,6 @@ struct ConfigLoader {
         printf("FEATURE_NORECOIL_ON\t\t\t\t\t%s\n", FEATURE_NORECOIL_ON ? "YES" : "NO");
         printf("FEATURE_SENSE_ON\t\t\t\t\t%s\n", FEATURE_SENSE_ON ? "YES" : "NO");
         printf("FEATURE_ITEM_GLOW_ON\t\t\t\t\t%s\n", FEATURE_ITEM_GLOW_ON ? "YES" : "NO");
-        printf("FEATURE_WEAPON_CHAMS_ON\t\t\t\t\t%s\n", FEATURE_WEAPON_CHAMS_ON ? "YES" : "NO");
         printf("FEATURE_TRIGGERBOT_ON\t\t\t\t\t%s\n\n", FEATURE_TRIGGERBOT_ON ? "YES" : "NO");
         printf("FEATURE_SPECTATOR_ON\t\t\t\t\t%s\n", FEATURE_SPECTATOR_ON ? "YES" : "NO");
         printf("FEATURE_SUPER_GLIDE_ON\t\t\t\t\t%s\n", FEATURE_SUPER_GLIDE_ON ? "YES" : "NO");
@@ -108,7 +103,6 @@ struct ConfigLoader {
         printf("FEATURE_PRINT_LEVELS_BUTTON\t\t\t\t%s\n", FEATURE_PRINT_LEVELS_BUTTON.c_str());
         printf("FEATURE_MAP_RADAR_ON\t\t\t\t\t%s\n", FEATURE_MAP_RADAR_ON ? "YES" : "NO");
         printf("FEATURE_MAP_RADAR_BUTTON\t\t\t\t%s\n", FEATURE_MAP_RADAR_BUTTON.c_str());
-        printf("WEAPON_CHAMS_COLOR\t\t\t\t\t%d\n", WEAPON_CHAMS_COLOR);
         printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
         //gameMode
         printf("IS_GAME_BR\t\t\t\t\t\t%s\n", IS_GAME_BR ? "YES" : "NO");
