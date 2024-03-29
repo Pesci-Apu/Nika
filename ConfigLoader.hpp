@@ -11,16 +11,16 @@ struct ConfigLoader {
     //features
     bool FEATURE_AIMBOT_ON = true;
     bool FEATURE_SENSE_ON = true;
-    bool FEATURE_ITEM_GLOW_ON = true;
-    bool FEATURE_WEAPON_CHAMS_ON = true;
-    bool FEATURE_SPECTATOR_ON = true;
-    bool FEATURE_QUICKTURN_ON = true;
-    bool FEATURE_SKINCHANGER_ON = true;
+    bool FEATURE_ITEM_GLOW_ON = false;
+    bool FEATURE_WEAPON_CHAMS_ON = false;
+    bool FEATURE_SPECTATOR_ON = false;
+    bool FEATURE_QUICKTURN_ON = false;
+    bool FEATURE_SKINCHANGER_ON = false;
     bool FEATURE_TRIGGERBOT_ON = true;
-    bool FEATURE_NORECOIL_ON = true;
+    bool FEATURE_NORECOIL_ON = false;
     bool FEATURE_PRINT_LEVELS_ON = true;
     bool FEATURE_SUPER_GLIDE_ON = true;
-    bool FEATURE_MAP_RADAR_ON = true;
+    bool FEATURE_MAP_RADAR_ON = false;
     int  WEAPON_CHAMS_COLOR = 1;
 
     //norecoil    
@@ -34,14 +34,14 @@ struct ConfigLoader {
     std::string FEATURE_QUICKTURN_BUTTON = "XK_f";
     std::string FEATURE_PRINT_LEVELS_BUTTON = "XK_p";
     std::string FEATURE_MAP_RADAR_BUTTON = "XK_m";
-    float AIMBOT_SMOOTH = 20.211;
-    float AIMBOT_SPEED = 40.211;
+    float AIMBOT_SMOOTH = 30.0;
+    float AIMBOT_SPEED = 15.0;
     float AIMBOT_SMOOTH_EXTRA_BY_DISTANCE = 1000;
     float AIMBOT_FOV = 5.0000;
     bool AIMBOT_PREDICT_BULLETDROP = true;
     bool AIMBOT_PREDICT_MOVEMENT = true;
     bool AIMBOT_ALLOW_TARGET_SWITCH = true;
-    int AIMBOT_MAX_DISTANCE = 100;
+    int AIMBOT_MAX_DISTANCE = 200;
     int AIMBOT_MIN_DISTANCE = 1;
     
 
