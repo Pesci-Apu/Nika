@@ -76,7 +76,6 @@ int main() {
             randyRandom->spectatorView(counter);
             randyRandom->SkinChange(counter);
             randyRandom->MapRadar(counter);
-            randyRandom->weaponChams(counter);
 
             //check how fast we completed all the processing and if we still have time left to sleep
             int processingTime = static_cast<int>(util::currentEpochMillis() - startTime);
