@@ -101,15 +101,6 @@ public:
             } 
         }
     }
-    //====================---------[WEAPON-CHAMS]-------------------------==================
-    void weaponChams(int counter){
-        if(cl->FEATURE_WEAPON_CHAMS_ON){
-            mem::Write<int>(lp->currentWeapon + OFF_GLOW_HIGHLIGHT_ID, cl->WEAPON_CHAMS_COLOR);
-            //mem::Write<int>(lp->currentWeapon + OFF_GLOW_THROUGH_WALL, 2);
-        }else{
-            mem::Write<int>(lp->currentWeapon + OFF_GLOW_HIGHLIGHT_ID, 0);
-        }
-    }
     //====================---------[PRINTLEVELS]-------------------------==================
     void printLevels(int counter)
     {
