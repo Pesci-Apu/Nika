@@ -4,31 +4,32 @@ struct LocalPlayer {
     uint64_t base;
     bool dead;
     bool knocked;
-    int teamNumber;
     bool inAttack;
     bool inZoom;
     bool inJump;
     bool weaponDiscarded;
-
+    bool grippingGrenade;
     Vector3D localOrigin;
     Vector3D CameraPosition;
     Vector2D viewAngles;
     Vector2D punchAngles;
     Vector2D punchAnglesPrev;
     Vector2D punchAnglesDiff;
-    int weaponIndex;
     long actWeaponID;
     long currentWeapon;
     long actWeaponIDMasked;
     long highlightSettingsPtr;
-    long weaponEntity; 
+    long weaponEntity;
+    long weaponHandle;
+    long weaponHandleMasked;
+    int weaponIndex;
+    int frameCount; 
     int grenadeID;
     int ammoInClip;
+    int teamNumber;
     int weaponSemiAuto;
     int currentHealth;
-    long weaponHandleMasked;
     float WeaponProjectileSpeed;
-    long weaponHandle;
     float WeaponProjectileScale;
     float local_yaw;
     float worldtime;
@@ -36,8 +37,6 @@ struct LocalPlayer {
     float traversalProgress;
     float traversalReleaseTime;
     float onWall;
-
-    int frameCount;
 
     void reset() {
         base = 0;
@@ -75,6 +74,7 @@ struct LocalPlayer {
            
             weaponEntity = mem::Read<long>(OFF_REGION + OFF_ENTITY_LIST + (weaponHandleMasked << 5), "LocalPlayer weaponEntity");
             grenadeID = mem::Read<int>(base + OFF_GRENADE_HANDLE, "LocalPlayer grenadeID");
+            grippingGrenade = grenadeID == -251 ? true : false;
             ammoInClip = mem::Read<int>(weaponEntity + OFFSET_AMMO, "LocalPlayer ammoInClip"); 
             weaponIndex = mem::Read<int>(weaponEntity + OFF_WEAPON_INDEX, "LocalPlayer weaponIndex");
             actWeaponID = mem::Read<long>((base + OFF_VIEW_MODELS), "LocalPlayer active Weapon ID");
