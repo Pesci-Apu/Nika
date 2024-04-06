@@ -157,7 +157,7 @@ public:
             }
             const auto spectatorlist_size = static_cast<int>(spectatorlist.size());
            
-            if (spectatorcount > 0){
+            if (spectatorcount > 0 && lp->currentHealth > 0){
                 printf("\n-[%d]-- SPECTATORS -- \n", spectatorcount);
                 for (int i = 0; i < spectatorlist_size; i++) 
                 {   
