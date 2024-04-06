@@ -23,7 +23,7 @@ struct Aim {
     }
     void Update(int counter) {
         if (!cl->FEATURE_AIMBOT_ON) { ReleaseTarget(); return; }
-        if (lp->grenadeID == -251){ ReleaseTarget(); return; }
+        if (lp->grippingGrenade){ ReleaseTarget(); return; }
         
         if (lp->inZoom) {
             FinalFOV = cl->AIMBOT_FOV;
