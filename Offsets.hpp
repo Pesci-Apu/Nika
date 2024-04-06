@@ -1,16 +1,17 @@
 #pragma once
-// GameVersion=v3.0.62.29
+// GameVersion=v3.0.62.30
 
 // Core
 constexpr long OFF_REGION = 0x140000000; //[Static]->Region
-constexpr long OFF_LEVEL = 0x16f9090; //[Miscellaneous]->LevelName
-constexpr long OFF_LOCAL_PLAYER = 0x2182bf8; //[Miscellaneous]->LocalPlayer
-constexpr long OFF_ENTITY_LIST = 0x1DD40F8; //[Miscellaneous]->cl_entitylist
-constexpr long OFF_GLOBAL_VARS = 0x16f8b90; //[Miscellaneous]->GlobalVars
+constexpr long OFF_LEVEL = 0x16f9140; //[Miscellaneous]->LevelName
+constexpr long OFF_LOCAL_PLAYER = 0x2182c78; //[Miscellaneous]->LocalPlayer
+constexpr long OFF_ENTITY_LIST = 0x1DD4178; //[Miscellaneous]->cl_entitylist
+constexpr long OFF_GLOBAL_VARS = 0x16f8c40; //[Miscellaneous]->GlobalVars
+constexpr long OFF_NAMELIST = 0xC5FEC00; //[Miscellaneous]->NameList
 
 // Buttons
 constexpr long OFF_IN_ATTACK = 0x073f2798; //[Buttons]->in_attack
-constexpr long OFF_IN_JUMP = 0x073f2878; //[Buttons]->in_jump
+constexpr long OFF_IN_JUMP = 0x073f2890; //[Buttons]->in_jump
 constexpr long OFF_IN_DUCK = 0x073f2978; //[Buttons]->in_duck
 constexpr long OFFSET_IN_FORWARD = 0x073f26c8; //[Buttons]->in_forward
 constexpr long OFFSET_TRAVERSAL_START_TIME = 0x2af0; //[RecvTable.DT_LocalPlayerExclusive]->m_traversalStartTime
@@ -21,7 +22,7 @@ constexpr long OFFSET_WALL_RUN_CLEAR_TIME = 0x3588; //RecvTable.DT_LocalPlayerEx
 
 // Player
 constexpr long OFF_VIEW_MATRIX = 0x11a350; //[RecvTable.DT_Player]->ViewMatrix 
-constexpr long OFF_VIEW_RENDER = 0x73f14f8; //[RecvTable.DT_Player]->ViewRender
+constexpr long OFF_VIEW_RENDER = 0x73f14f0; //[RecvTable.DT_Player]->ViewRender
 constexpr long OFF_VIEW_MODELS = 0x2d18; //[RecvTable.DT_Player]->m_hViewModels
 constexpr long OFF_ZOOMING = 0x1bd1; //[RecvTable.DT_Player]->m_bZooming
 constexpr long OFF_LOCAL_ORIGIN = 0x017c; //[DataMap.CBaseViewModel]->m_vecAbsOrigin
@@ -42,7 +43,6 @@ constexpr long OFF_STUDIOHDR = 0xff0; //[Miscellaneous]->CBaseAnimating!m_pStudi
 constexpr long OFF_BONES = 0x0da0 + 0x48; //[RecvTable.DT_BaseAnimating]->m_nForceBone + 0x48
 constexpr long OFF_CAMERAORIGIN = 0x1ed0; //[Miscellaneous]->CPlayer!camera_origin
 constexpr long OFF_MODELNAME = 0x0030; //[DataMap.C_BaseEntity]->m_ModelName
-constexpr long OFF_NAMELIST = 0xC5FEC00; //[Miscellaneous]->NameList
 constexpr long OFF_YAW = 0x223c - 0x8; //[DataMap.C_Player]=>m_currentFramePlayer.m_ammoPoolCount - 0x8
 constexpr long OFF_NAMEINDEX = 0x38; //[RecvTable.DT_BaseEntity]
 constexpr long OFF_XPLEVEL = 0x3694;   //m_xp
