@@ -1,19 +1,18 @@
 #pragma once
-// GameVersion=v3.0.62.30
-
+// GameVersion = v3.0.63.32
 // Core
 constexpr long OFF_REGION = 0x140000000; //[Static]->Region
-constexpr long OFF_LEVEL = 0x16f9140; //[Miscellaneous]->LevelName
-constexpr long OFF_LOCAL_PLAYER = 0x2182c78; //[Miscellaneous]->LocalPlayer
-constexpr long OFF_ENTITY_LIST = 0x1DD4178; //[Miscellaneous]->cl_entitylist
-constexpr long OFF_GLOBAL_VARS = 0x16f8c40; //[Miscellaneous]->GlobalVars
-constexpr long OFF_NAMELIST = 0xC5FEC00; //[Miscellaneous]->NameList
+constexpr long OFF_LEVEL = 0x16f9500; //[Miscellaneous]->LevelName
+constexpr long OFF_LOCAL_PLAYER = 0x21830f8; //[Miscellaneous]->LocalPlayer
+constexpr long OFF_ENTITY_LIST = 0x1DD45F8; //[Miscellaneous]->cl_entitylist
+constexpr long OFF_GLOBAL_VARS = 0x16f9000; //[Miscellaneous]->GlobalVars
+constexpr long OFF_NAMELIST = 0xC5FF080; //[Miscellaneous]->NameList
 
 // Buttons
-constexpr long OFF_IN_ATTACK = 0x073f2798; //[Buttons]->in_attack
-constexpr long OFF_IN_JUMP = 0x073f2890; //[Buttons]->in_jump
-constexpr long OFF_IN_DUCK = 0x073f2978; //[Buttons]->in_duck
-constexpr long OFFSET_IN_FORWARD = 0x073f26c8; //[Buttons]->in_forward
+constexpr long OFF_IN_ATTACK = 0x073f2bf8; //[Buttons]->in_attack
+constexpr long OFF_IN_JUMP = 0x073f2d00; //[Buttons]->in_jump
+constexpr long OFF_IN_DUCK = 0x073f2df8; //[Buttons]->in_duck
+constexpr long OFFSET_IN_FORWARD = 0x073f2b48; //[Buttons]->in_forward
 constexpr long OFFSET_TRAVERSAL_START_TIME = 0x2af0; //[RecvTable.DT_LocalPlayerExclusive]->m_traversalStartTime
 constexpr long OFFSET_TRAVERSAL_PROGRESS = 0x2aec; //[RecvTable.DT_LocalPlayerExclusive]->m_traversalProgress
 constexpr long OFFSET_TRAVERSAL_RELEASE_TIME = 0x2af8;		   //[RecvTable.DT_LocalPlayerExclusive]->m_traversalReleaseTime
@@ -22,7 +21,7 @@ constexpr long OFFSET_WALL_RUN_CLEAR_TIME = 0x3588; //RecvTable.DT_LocalPlayerEx
 
 // Player
 constexpr long OFF_VIEW_MATRIX = 0x11a350; //[RecvTable.DT_Player]->ViewMatrix 
-constexpr long OFF_VIEW_RENDER = 0x73f14f0; //[RecvTable.DT_Player]->ViewRender
+constexpr long OFF_VIEW_RENDER = 0x73f1970; //[RecvTable.DT_Player]->ViewRender
 constexpr long OFF_VIEW_MODELS = 0x2d18; //[RecvTable.DT_Player]->m_hViewModels
 constexpr long OFF_ZOOMING = 0x1bd1; //[RecvTable.DT_Player]->m_bZooming
 constexpr long OFF_LOCAL_ORIGIN = 0x017c; //[DataMap.CBaseViewModel]->m_vecAbsOrigin
@@ -44,7 +43,7 @@ constexpr long OFF_BONES = 0x0da0 + 0x48; //[RecvTable.DT_BaseAnimating]->m_nFor
 constexpr long OFF_CAMERAORIGIN = 0x1ed0; //[Miscellaneous]->CPlayer!camera_origin
 constexpr long OFF_MODELNAME = 0x0030; //[DataMap.C_BaseEntity]->m_ModelName
 constexpr long OFF_YAW = 0x223c - 0x8; //[DataMap.C_Player]=>m_currentFramePlayer.m_ammoPoolCount - 0x8
-constexpr long OFF_NAMEINDEX = 0x38; //[RecvTable.DT_BaseEntity]
+constexpr long OFF_NAMEINDEX = 0x057c; //[RecvTable.DT_BaseEntity]
 constexpr long OFF_XPLEVEL = 0x3694;   //m_xp
 
 // Weapon
@@ -56,12 +55,12 @@ constexpr long OFF_SKIN = 0x0d58; //[RecvTable.DT_BaseAnimating]->m_nSkin
 constexpr long OFF_WEAPON_DISCARDED = 0x1599; //[RecvTable.DT_WeaponX]->m_discarded
 constexpr long OFFSET_TIME_BASE = 0x2088; //[RecvTable.DT_Player]->m_currentFramePlayer.timeBase
 
-constexpr long OFF_PROJECTILESCALE = 0x1eac; //CWeaponX!m_flProjectileScale //[WeaponSettings]->projectile_gravity_scale + [WeaponSettingsMeta].base
-constexpr long OFF_PROJECTILESPEED = 0x1ea4; //CWeaponX!m_flProjectileSpeed //[WeaponSettings]->projectile_launch_speed + [WeaponSettingsMeta].base
+constexpr long OFF_PROJECTILESCALE = 0x04ec; //CWeaponX!m_flProjectileScale //[WeaponSettings]->projectile_gravity_scale + [WeaponSettingsMeta].base
+constexpr long OFF_PROJECTILESPEED = 0x04e4; //CWeaponX!m_flProjectileSpeed //[WeaponSettings]->projectile_launch_speed + [WeaponSettingsMeta].base
 
 // Glow
 constexpr long HIGHLIGHT_TYPE_SIZE = 0x34;
 constexpr long OFF_GLOW_THROUGH_WALL = 0x26c; //[DT_HighlightSettings].?
 constexpr long OFF_GLOW_FIX = 0x268;
 constexpr long OFF_GLOW_HIGHLIGHT_ID = 0x28C; //[DT_HighlightSettings].m_highlightServerActiveStates
-constexpr long OFF_GLOW_HIGHLIGHTS = 0xBB24350; //
+constexpr long OFF_GLOW_HIGHLIGHTS = 0xBB247D0; //
