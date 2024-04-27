@@ -1,4 +1,7 @@
+#include <sstream> // for std::stringstream
+
 #pragma once
+
 typedef uint8_t BYTE;
 
 struct Color {
@@ -15,16 +18,28 @@ struct Color {
     }
 };
 
+namespace Map{
+    bool map_mixtape;
+};
 struct Level {
 	std::string name;
 	bool playable;
 	bool trainingArea;
+    bool mapMixtape;
+    char gameMode[64] = {0};
+    std::unordered_map<std::string, bool> mixtape = {{"control", true}, {"freedm", true}, {"arenas", true}};
 
 	void readFromMemory() {
-		name = mem::ReadString(OFF_REGION + OFF_LEVEL, 1024, "Level name");
+		uint64_t gameModePtr = mem::Read<uint64_t>(OFF_REGION + OFF_GAMEMODE + 0x50, "gameModePtr");
+        name = mem::ReadString(OFF_REGION + OFF_LEVEL, 1024, "Level name");
 		playable = !name.empty() && name != "mp_lobby";
 		trainingArea = name == "mp_rr_canyonlands_staging_mu1";
-	}
+        if (gameModePtr > 0){
+            mem::Read(gameModePtr, &gameMode, sizeof(gameMode));
+            mapMixtape=mixtape[gameMode];
+            Map::map_mixtape = mapMixtape;            
+        }
+    }
 };
 
 namespace util {
