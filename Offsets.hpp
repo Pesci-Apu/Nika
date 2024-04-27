@@ -48,7 +48,6 @@ constexpr long OFF_XPLEVEL = 0x3694;   //m_xp
 constexpr long OFF_SQUAD_ID = 0x0334;  //m_squadID
 constexpr long OFF_GAMEMODE = 0x021ba960; //mp_gamemode
 
-    
 // Weapon
 constexpr long OFF_WEAPON_HANDLE = 0x1934; //[RecvTable.DT_BaseCombatCharacter]->m_latestPrimaryWeapons
 constexpr long OFF_WEAPON_INDEX = 0x1778; //[RecvTable.DT_WeaponX]->m_weaponNameIndex
