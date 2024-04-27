@@ -1,7 +1,7 @@
 #pragma once
 
 struct Player {
-    LocalPlayer* myLocalPlayer;
+    LocalPlayer* lp;
     ConfigLoader* cl;
     int index;
     uint64_t base;
@@ -29,7 +29,6 @@ struct Player {
     //values used by aimbot
     bool aimbotLocked;
     bool IsLockedOn;
-    bool nonBR;
     Vector2D aimbotDesiredAngles;
     Vector2D aimbotDesiredAnglesIncrement;
     Vector2D aimbotDesiredAnglesSmoothed;
@@ -41,7 +40,7 @@ struct Player {
 
     Player(int in_index, LocalPlayer* in_localPlayer, ConfigLoader* in_cl) {
         this->index = in_index;
-        this->myLocalPlayer = in_localPlayer;
+        this->lp = in_localPlayer;
         this->cl = in_cl;
     }
 
@@ -116,15 +115,12 @@ struct Player {
         visible = isDummie() || aimedAt || lastTimeVisiblePrev < lastTimeVisible; //
         lastTimeVisiblePrev = lastTimeVisible;
         
-        if (myLocalPlayer->isValid()) {
-            local = myLocalPlayer->base == base;
-            nonBR = !cl->IS_GAME_BR;
-            friendly = (nonBR)
-                ? (myLocalPlayer->teamNumber % 2 == 0 && teamNumber % 2 == 0) || (myLocalPlayer->teamNumber % 2 != 0 && teamNumber % 2 != 0)
-                : myLocalPlayer->teamNumber == teamNumber;
+        if (lp->isValid()) {
+            local = lp->base == base;
+            friendly = isSameTeam();
             enemy = !friendly;
-            distanceToLocalPlayer = myLocalPlayer->localOrigin.Distance(localOrigin);
-            distance2DToLocalPlayer = myLocalPlayer->localOrigin.To2D().Distance(localOrigin.To2D());
+            distanceToLocalPlayer = lp->localOrigin.Distance(localOrigin);
+            distance2DToLocalPlayer = lp->localOrigin.To2D().Distance(localOrigin.To2D());
             if (visible) {
                 aimbotDesiredAngles = calcDesiredAngles();
                 aimbotDesiredAnglesIncrement = calcDesiredAnglesIncrement();
@@ -194,6 +190,17 @@ struct Player {
                 mem::Write<GlowMode>(highlightSettingsPtr + (HIGHLIGHT_TYPE_SIZE * highlightId) + 0, newGlowMode);
             }
         } 
+    }
+    bool isSameTeam()
+    {
+        if (Map::map_mixtape && lp->squadNumber == -1)
+        {
+            return (teamNumber & 1) == (lp->teamNumber & 1);
+        }
+        else
+        {
+            return teamNumber == lp->teamNumber;
+        }
     }
     bool isValid() {
         return base != 0 && (isPlayer() || isDummie());
@@ -272,7 +279,7 @@ struct Player {
         return mem::Read<uint16_t>(BonePointer, "Player BonePointer");
     }
     float calcPitchIncrement() {
-        float wayA = aimbotDesiredAngles.x - myLocalPlayer->viewAngles.x;
+        float wayA = aimbotDesiredAngles.x - lp->viewAngles.x;
         float wayB = 180 - abs(wayA);
         if (wayA > 0 && wayB > 0)
             wayB *= -1;
@@ -283,7 +290,7 @@ struct Player {
     float calcDesiredPitch() {
         if (local) return 0;
         const Vector3D shift = Vector3D(100000, 100000, 100000);
-        const Vector3D originA = myLocalPlayer->localOrigin.Add(shift);
+        const Vector3D originA = lp->localOrigin.Add(shift);
         const Vector3D originB = localOrigin_predicted.Add(shift).Subtract(Vector3D(0, 0, 10));
         const float deltaZ = originB.z - originA.z;
         const float pitchInRadians = std::atan2(-deltaZ, distance2DToLocalPlayer);
@@ -293,7 +300,7 @@ struct Player {
     float calcDesiredYaw() {
         if (local) return 0;
         const Vector2D shift = Vector2D(100000, 100000);
-        const Vector2D originA = myLocalPlayer->localOrigin.To2D().Add(shift);
+        const Vector2D originA = lp->localOrigin.To2D().Add(shift);
         const Vector2D originB = localOrigin_predicted.To2D().Add(shift);
         const Vector2D diff = originB.Subtract(originA);
         const double yawInRadians = std::atan2(diff.y, diff.x);
@@ -301,7 +308,7 @@ struct Player {
         return degrees;
     }
     float calcYawIncrement() {
-        float wayA = aimbotDesiredAngles.y - myLocalPlayer->viewAngles.y;
+        float wayA = aimbotDesiredAngles.y - lp->viewAngles.y;
         float wayB = 360 - abs(wayA);
         if (wayA > 0 && wayB > 0)
             wayB *= -1;
