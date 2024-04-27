@@ -45,6 +45,9 @@ constexpr long OFF_MODELNAME = 0x0030; //[DataMap.C_BaseEntity]->m_ModelName
 constexpr long OFF_YAW = 0x223c - 0x8; //[DataMap.C_Player]=>m_currentFramePlayer.m_ammoPoolCount - 0x8
 constexpr long OFF_NAMEINDEX = 0x38; //[RecvTable.DT_BaseEntity]
 constexpr long OFF_XPLEVEL = 0x3694;   //m_xp
+constexpr long OFF_SQUAD_ID = 0x0334;  //m_squadID
+constexpr long OFF_GAMEMODE = 0x021ba960; //mp_gamemode
+
     
 // Weapon
 constexpr long OFF_WEAPON_HANDLE = 0x1934; //[RecvTable.DT_BaseCombatCharacter]->m_latestPrimaryWeapons
