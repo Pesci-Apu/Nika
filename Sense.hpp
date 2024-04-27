@@ -47,6 +47,11 @@ struct Sense {
                 p->setGlowThroughWall(1);  
                 int healthShield = p->currentHealth + p->currentShields; 
                 p->setCustomGlow(healthShield, true, false);
+            }
+            else if (distance <  cl->SENSE_MAXRANGE) {
+                p->setGlowEnable(1);
+                p->setGlowThroughWall(1);
+                p->setCustomGlow(0, false, false);
             } 
             else if (p->getGlowEnable() == 1 && p->getGlowThroughWall() == 1) {
                 p->setGlowEnable(0);
