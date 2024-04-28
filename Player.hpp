@@ -26,13 +26,9 @@ struct Player {
     bool visible;
     float distanceToLocalPlayer;
     float distance2DToLocalPlayer;
-    //values used by aimbot
-    bool aimbotLocked;
     bool IsLockedOn;
     Vector2D aimbotDesiredAngles;
     Vector2D aimbotDesiredAnglesIncrement;
-    Vector2D aimbotDesiredAnglesSmoothed;
-    Vector2D aimbotDesiredAnglesSmoothedNoRecoil;
     float view_yaw;
     float aimbotScore;
     uintptr_t nameOffset;
