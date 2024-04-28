@@ -2,7 +2,7 @@
 #include "LocalPlayer.hpp"
 #include "Player.hpp"
 struct Aim {
-    HitboxType Hitbox = HitboxType::LowerChest;
+    HitboxType Hitbox = HitboxType::Neck;
 
     float FinalDistance = 0;
     float FinalFOV = 0;
