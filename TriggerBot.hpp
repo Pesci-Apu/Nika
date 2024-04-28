@@ -13,7 +13,7 @@ struct TriggerBot {
     }
     
     void shootAtEnemy(int counter) {
-        if (!cl->FEATURE_TRIGGERBOT_ON) return;
+        if (!cl->FEATURE_TRIGGERBOT_ON || display->keyDown(cl->TRIGGERBOT_PAUSE_BUTTON)) return;
         if (!lp->isCombatReady()) return;
         
         int weaponId = lp->weaponIndex;
@@ -43,6 +43,7 @@ struct TriggerBot {
             if (!p->isCombatReady()) continue;
             if (!p->enemy) continue;
             if (!p->aimedAt) continue;
+            
             if (p->distanceToLocalPlayer <= RANGE_MAX ) {
                 display->mouseClickLeft();
                 break;
