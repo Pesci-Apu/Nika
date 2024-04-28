@@ -33,10 +33,6 @@ struct ConfigLoader {
     bool AIMBOT_ACTIVATED_BY_ATTACK = true;
     bool AIMBOT_ACTIVATED_BY_ADS = false;
     bool AIMBOT_ACTIVATED_BY_KEY = false;
-    std::string AIMBOT_ACTIVATION_KEY = "XK_Shift_L";
-    std::string FEATURE_QUICKTURN_BUTTON = "XK_f";
-    std::string FEATURE_PRINT_LEVELS_BUTTON = "XK_p";
-    std::string FEATURE_MAP_RADAR_BUTTON = "XK_m";
     float AIMBOT_SMOOTH = 20.211;
     float AIMBOT_SPEED = 40.211;
     float AIMBOT_SMOOTH_EXTRA_BY_DISTANCE = 1000;
@@ -46,6 +42,12 @@ struct ConfigLoader {
     bool AIMBOT_ALLOW_TARGET_SWITCH = true;
     int AIMBOT_MAX_DISTANCE = 100;
     int AIMBOT_MIN_DISTANCE = 1;
+    //keys
+    std::string AIMBOT_ACTIVATION_KEY = "XK_Shift_L";
+    std::string FEATURE_QUICKTURN_BUTTON = "XK_f";
+    std::string FEATURE_PRINT_LEVELS_BUTTON = "XK_p";
+    std::string FEATURE_MAP_RADAR_BUTTON = "XK_m";
+    std::string TRIGGERBOT_PAUSE_BUTTON = "XK_z";
 
     void loadVariables(std::string key, std::string val) {
         //features
@@ -60,6 +62,7 @@ struct ConfigLoader {
         //triggerBot
         TRIGGERBOT_ZOOMED_RANGE = (key.compare("TRIGGERBOT_ZOOMED_RANGE") != 0) ? TRIGGERBOT_ZOOMED_RANGE : stoi(val);
         TRIGGERBOT_HIPFIRE_RANGE = (key.compare("TRIGGERBOT_HIPFIRE_RANGE") != 0) ? TRIGGERBOT_HIPFIRE_RANGE : stoi(val);
+        TRIGGERBOT_PAUSE_BUTTON = (key.compare("TRIGGERBOT_PAUSE_BUTTON") != 0) ? TRIGGERBOT_PAUSE_BUTTON : trimConstructive(val);
         //sense
         SENSE_MAXRANGE = (key.compare("SENSE_MAXRANGE") != 0) ? SENSE_MAXRANGE : stoi(val);
         //aimbot
@@ -113,6 +116,7 @@ struct ConfigLoader {
         //triggerBot
         printf("TRIGGERBOT_ZOOMED_RANGE\t\t\t\t\t%d\n", TRIGGERBOT_ZOOMED_RANGE);
         printf("TRIGGERBOT_HIPFIRE_RANGE\t\t\t\t%d\n", TRIGGERBOT_HIPFIRE_RANGE);
+        printf("TRIGGERBOT_PAUSE_BUTTON\t\t\t\t\t%s\n", TRIGGERBOT_PAUSE_BUTTON.c_str());
         printf("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n");
         //sense
         printf("SENSE_MAXRANGE\t\t\t\t\t\t%d\n", SENSE_MAXRANGE);
