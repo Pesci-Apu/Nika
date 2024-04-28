@@ -21,10 +21,25 @@ struct Aim {
         this->players = all_players;
         this->cl = ConfigLoada;   
     }
+    bool active(){
+        bool aimbotIsOn = cl->FEATURE_AIMBOT_ON;
+        bool combatReady = lp->isCombatReady();
+
+        bool activatedByAttack = cl->AIMBOT_ACTIVATED_BY_ATTACK && lp->inAttack;
+        bool activatedByADS = cl->AIMBOT_ACTIVATED_BY_ADS && lp->inZoom;
+        bool activatedByKey = (cl->AIMBOT_ACTIVATION_KEY != "" ||  "NONE" ) && display->keyDown(cl->AIMBOT_ACTIVATION_KEY);
+        bool active = aimbotIsOn
+            && combatReady
+            && (activatedByAttack
+                || activatedByADS
+                || activatedByKey);
+        return active;
+    }
     void Update(int counter) {
-        if (!cl->FEATURE_AIMBOT_ON) { ReleaseTarget(); return; }
+
+
         if (lp->grippingGrenade){ ReleaseTarget(); return; }
-        
+        if (!active()){ ReleaseTarget(); return; }
         if (lp->inZoom) {
             FinalFOV = cl->AIMBOT_FOV;
             FinalDistance = cl->AIMBOT_MAX_DISTANCE;
@@ -33,9 +48,6 @@ struct Aim {
             FinalFOV = (cl->AIMBOT_FOV + 20);
             FinalDistance = HipfireDistance;
         }
-
-        if (!lp->isCombatReady()) { TargetSelected = false; return; }
-        if (!display->keyDown(cl->AIMBOT_ACTIVATED_BY_BUTTON) && !lp->inAttack) { ReleaseTarget(); return; }
         
         Player* Target = CurrentTarget;
         if (!IsValidTarget(Target)) {
@@ -47,13 +59,11 @@ struct Aim {
                 CurrentTarget = nullptr;
                 return;
             }
-            
             CurrentTarget = Target;
             CurrentTarget->IsLockedOn = true;
             TargetSelected = true;
         }
 
-        // Where the fun begins //
         double DistanceFromCrosshair = CalculateDistanceFromCrosshair(CurrentTarget);
         if (DistanceFromCrosshair > FinalFOV || DistanceFromCrosshair == -1) {
             ReleaseTarget();
@@ -63,37 +73,29 @@ struct Aim {
     }
 
     void StartAiming() {
-        // Get Target Angle
         QAngle DesiredAngles = QAngle(0, 0);
         if (!GetAngle(CurrentTarget, DesiredAngles))
             return;
 
-        // Calculate Increment
         Vector2D DesiredAnglesIncrement = Vector2D(CalculatePitchIncrement(DesiredAngles), CalculateYawIncrement(DesiredAngles));
 
-        // Calculate Smooth
         float Extra = cl->AIMBOT_SMOOTH_EXTRA_BY_DISTANCE / CurrentTarget->distanceToLocalPlayer;
         float TotalSmooth = cl->AIMBOT_SMOOTH + Extra;
 
-        // No recoil calcs
         Vector2D punchAnglesDiff = lp->punchAnglesDiff.Divide(cl->AIMBOT_SMOOTH).Multiply(cl->AIMBOT_SPEED);
         double nrPitchIncrement = punchAnglesDiff.x;
         double nrYawIncrement = -punchAnglesDiff.y;
 
-        // Aimbot calcs
         Vector2D aimbotDelta = DesiredAnglesIncrement.Divide(TotalSmooth).Multiply(cl->AIMBOT_SPEED);
         double aimYawIncrement = aimbotDelta.y * -1;
         double aimPitchIncrement = aimbotDelta.x;
 
-        // Combine
         double totalPitchIncrement = aimPitchIncrement + nrPitchIncrement;
         double totalYawIncrement = aimYawIncrement + nrYawIncrement;
 
-        // Turn into integers
         int totalPitchIncrementInt = RoundHalfEven(AL1AF0(totalPitchIncrement));
         int totalYawIncrementInt = RoundHalfEven(AL1AF0(totalYawIncrement));
 
-        // Move Mouse
         if (totalPitchIncrementInt == 0 && totalYawIncrementInt == 0) return;
         display->moveMouseRelative(totalPitchIncrementInt, totalYawIncrementInt);
     }
