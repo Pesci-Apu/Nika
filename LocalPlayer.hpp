@@ -7,7 +7,6 @@ struct LocalPlayer {
     bool inAttack;
     bool inZoom;
     bool inJump;
-    bool weaponDiscarded;
     bool grippingGrenade;
     Vector3D localOrigin;
     Vector3D CameraPosition;
