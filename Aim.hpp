@@ -27,7 +27,7 @@ struct Aim {
 
         bool activatedByAttack = cl->AIMBOT_ACTIVATED_BY_ATTACK && lp->inAttack;
         bool activatedByADS = cl->AIMBOT_ACTIVATED_BY_ADS && lp->inZoom;
-        bool activatedByKey = (cl->AIMBOT_ACTIVATION_KEY != "" ||  "NONE" ) && display->keyDown(cl->AIMBOT_ACTIVATION_KEY);
+        bool activatedByKey = cl->AIMBOT_ACTIVATED_BY_KEY && (cl->AIMBOT_ACTIVATION_KEY != "" || "NONE" ) && display->keyDown(cl->AIMBOT_ACTIVATION_KEY);
         bool active = aimbotIsOn
             && combatReady
             && (activatedByAttack
