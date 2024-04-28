@@ -33,11 +33,9 @@ struct TriggerBot {
             weaponId != WEAPON_3030 &&
             weaponId != WEAPON_TRIPLE_TAKE &&
             weaponId != WEAPON_BOCEK &&
-            weaponId != WEAPON_NEMESIS &&
             weaponId != WEAPON_THROWING_KNIFE
             )return;
 
-        //max range changes based on if we are zoomed in or not
         const float RANGE_MAX = (lp->inZoom) ? util::metersToGameUnits(cl->TRIGGERBOT_ZOOMED_RANGE) : util::metersToGameUnits(cl->TRIGGERBOT_HIPFIRE_RANGE);
 
         for (int i = 0; i < players->size(); i++) {
