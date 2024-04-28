@@ -124,7 +124,19 @@ enum class HitboxType {
     UpperChest = 2,
     LowerChest = 3,
     Stomach = 4,
-    Hip = 5
+    Hip = 5,
+    LeftShoulder = 6,
+    LeftElbow = 7,
+    LeftHand = 8,
+    RightShoulder = 9,
+    RightElbow = 10,
+    RightHand = 11,
+    LeftThighs = 12,
+    LeftKnees = 13,
+    LeftLeg = 18,
+    RightThighs = 16,
+    RightKnees = 17,
+    RightLeg = 14
 };
 
 struct Matrix3x4 {
