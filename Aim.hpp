@@ -24,7 +24,6 @@ struct Aim {
     bool active(){
         bool aimbotIsOn = cl->FEATURE_AIMBOT_ON;
         bool combatReady = lp->isCombatReady();
-
         bool activatedByAttack = cl->AIMBOT_ACTIVATED_BY_ATTACK && lp->inAttack;
         bool activatedByADS = cl->AIMBOT_ACTIVATED_BY_ADS && lp->inZoom;
         bool activatedByKey = cl->AIMBOT_ACTIVATED_BY_KEY && (cl->AIMBOT_ACTIVATION_KEY != "" || "NONE" ) && display->keyDown(cl->AIMBOT_ACTIVATION_KEY);
@@ -36,8 +35,6 @@ struct Aim {
         return active;
     }
     void Update(int counter) {
-
-
         if (lp->grippingGrenade){ ReleaseTarget(); return; }
         if (!active()){ ReleaseTarget(); return; }
         if (lp->inZoom) {
