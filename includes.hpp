@@ -3,7 +3,6 @@
 #include <limits>
 #include <cstdint>
 #include <sstream>
-#include <sys/uio.h>
 #include <math.h>
 #include <cstring>
 #include <iostream>
@@ -21,10 +20,11 @@
 #include <random>
 #include <fstream>
 #include <sys/stat.h>
+#include <sys/uio.h>
 #include <cctype>
 #include <locale>
-#include <stdint.h>
 #include <iterator>
+#include <atomic>
 //==========[CORE]=============
 #include "Vectors.hpp"
 #include "Memory.hpp"
