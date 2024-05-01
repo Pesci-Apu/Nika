@@ -95,7 +95,6 @@ struct Player {
         if (!isPlayer() && !isDummie()) { reset(); return; }
         dead = (isDummie()) ? false : mem::Read<short>(base + OFF_LIFE_STATE, "Player dead") > 0;
         knocked = (isDummie()) ? false : mem::Read<short>(base + OFF_BLEEDOUT_STATE, "Player knocked") > 0;
-    
         view_yaw = mem::Read<float>(base + OFF_YAW, "Player view_yaw");
         localOrigin = mem::Read<Vector3D>(base + OFF_LOCAL_ORIGIN, "Player localOrigin");
         AbsoluteVelocity = mem::Read<Vector3D>(base + OFF_ABSVELOCITY, "Player AbsoluteVelocity");
@@ -168,24 +167,15 @@ struct Player {
             glowColorRGB = { 0, 0.5, 0 }; // low health enemies // green color
         }
         mem::Write<unsigned char>(basePointer + OFF_GLOW_HIGHLIGHT_ID + contextId, settingIndex);
-        
-        long highlightSettingsPtr = mem::Read<long>(OFF_REGION + OFF_GLOW_HIGHLIGHTS, "Player highlightSettingsPtr");
         if (!isSameTeam) {
             mem::Write<typeof(highlightFunctionBits)>(
-                highlightSettingsPtr + HIGHLIGHT_TYPE_SIZE * settingIndex + 0, highlightFunctionBits);
+                lp->highlightSettingsPtr + HIGHLIGHT_TYPE_SIZE * settingIndex + 0, highlightFunctionBits);
             mem::Write<typeof(glowColorRGB)>(
-                highlightSettingsPtr + HIGHLIGHT_TYPE_SIZE * settingIndex + 4, glowColorRGB);
+                lp->highlightSettingsPtr + HIGHLIGHT_TYPE_SIZE * settingIndex + 4, glowColorRGB);
             mem::Write<int>(basePointer + OFF_GLOW_FIX, 0);
         }
         
-        if(cl->FEATURE_ITEM_GLOW_ON){
-            for (int highlightId = 30; highlightId < 40; highlightId++) {
-            const GlowMode newGlowMode = { 137,0,0,127 };
-            const GlowMode oldGlowMode = mem::Read<GlowMode>(highlightSettingsPtr + (HIGHLIGHT_TYPE_SIZE * highlightId) + 0, "Player oldGlowMode");
-            if (newGlowMode != oldGlowMode)
-                mem::Write<GlowMode>(highlightSettingsPtr + (HIGHLIGHT_TYPE_SIZE * highlightId) + 0, newGlowMode);
-            }
-        } 
+        
     }
     bool isSameTeam()
     {
