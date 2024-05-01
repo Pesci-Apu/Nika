@@ -59,7 +59,8 @@ int main() {
             noRecoil->controlWeapon();
             triggerBot->shootAtEnemy(counter);
             sense->update(counter);
-            aim->Update(counter);
+            sense->itemGlow(counter);
+            aim->update(counter);
             random->runAll(counter);
             
             int processingTime = static_cast<int>(util::currentEpochMillis() - startTime);
