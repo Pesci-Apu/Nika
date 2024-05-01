@@ -60,25 +60,18 @@ struct Sense {
             }
         }
     }
-
-
-
+    
     void itemGlow(int counter){
         if (!map->playable)
             return;
         if (!cl->FEATURE_ITEM_GLOW_ON)
             return;
-        for (int i = 0; i < players->size(); i++) {
-            Player *p = players->at(i);
-            if (!p->isValid())
-                continue;
-            for (int highlightId = 30; highlightId < 40; highlightId++) {
-                const GlowMode newGlowMode = { 137,0,0,127 };
-                const GlowMode oldGlowMode = mem::Read<GlowMode>(p->highlightSettingsPtr + (HIGHLIGHT_TYPE_SIZE * highlightId) + 0, "Player oldGlowMode");
-                if (newGlowMode != oldGlowMode)
-                    mem::Write<GlowMode>(p->highlightSettingsPtr + (HIGHLIGHT_TYPE_SIZE * highlightId) + 0, newGlowMode);
-            }
-        }     
+        for (int highlightId = 30; highlightId < 40; highlightId++) {
+            const GlowMode newGlowMode = { 137,0,0,127 };
+            const GlowMode oldGlowMode = mem::Read<GlowMode>(lp->highlightSettingsPtr + (HIGHLIGHT_TYPE_SIZE * highlightId) + 0, "Player oldGlowMode");
+            if (newGlowMode != oldGlowMode)
+                mem::Write<GlowMode>(lp->highlightSettingsPtr + (HIGHLIGHT_TYPE_SIZE * highlightId) + 0, newGlowMode);
+        }         
     }
 };
 
