@@ -34,7 +34,7 @@ struct Aim {
                 || activatedByKey);
         return active;
     }
-    void Update(int counter) {
+    void update(int counter) {
         if (lp->grippingGrenade){ ReleaseTarget(); return; }
         if (!active()){ ReleaseTarget(); return; }
         if (lp->inZoom) {
