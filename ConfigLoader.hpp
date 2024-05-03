@@ -92,7 +92,7 @@ struct ConfigLoader {
         }
 
     void print() {
-        printf("\n==================== GRINDER SETTINGS LOADED ========================\n");
+        printf("\n==================== NIKA SETTINGS LOADED ==========================\n");
         //features
         printf("FEATURE_AIMBOT_ON\t\t\t\t\t%s\n", FEATURE_AIMBOT_ON ? "YES" : "NO");
         printf("FEATURE_NORECOIL_ON\t\t\t\t\t%s\n", FEATURE_NORECOIL_ON ? "YES" : "NO");
@@ -137,11 +137,13 @@ struct ConfigLoader {
         printf("AIMBOT_MIN_DISTANCE\t\t\t\t\t%d\n", AIMBOT_MIN_DISTANCE);
 
         printf("=====================================================================\n\n");
+        
     }
     void reloadFile() {
         if (loadFileIntoVector()) {
             parseLines();
-            print();
+            print(); 
+            printLogo();          
         }
     }
     void parseLines() {
@@ -217,5 +219,57 @@ struct ConfigLoader {
         std::string result = input;
         std::transform(result.begin(), result.end(), result.begin(), ::tolower);
         return result;
+    }
+
+    void printLogo(){
+        std::cout << "\033[1;33m";         
+        std::cout << " .--..--..--..--..--..--..--..--..--..--..--..--..--..--.\n";
+        std::this_thread::sleep_for(std::chrono::milliseconds(69));
+        std::cout << R"(/ .. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \)" << std::endl;
+        std::this_thread::sleep_for(std::chrono::milliseconds(69));
+        std::cout << R"(\ \/\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ \/ /)" << std::endl;
+        std::this_thread::sleep_for(std::chrono::milliseconds(69));
+        std::cout << R"( \/ /`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'\/ /)" << std::endl;
+        std::this_thread::sleep_for(std::chrono::milliseconds(69));
+        std::cout << R"( / /\                                                / /\)" << std::endl;
+        std::this_thread::sleep_for(std::chrono::milliseconds(69));
+        std::cout << R"(/ /\ \          ,--.             ,--.               / /\ \)" << std::endl;
+        std::this_thread::sleep_for(std::chrono::milliseconds(69));
+        std::cout << R"(\ \/ /        ,--.'|  ,---,  ,--/  /|  ,---,,       \ \/ /)" << std::endl;
+        std::this_thread::sleep_for(std::chrono::milliseconds(69));
+        std::cout << R"( \/ /     ,--,:  : ,`--.' ,---,': / ' '  .'  :       \/ /)" << std::endl;
+        std::this_thread::sleep_for(std::chrono::milliseconds(69));
+        std::cout << R"( / /\  ,`--.'`|  ' |   :  :   : '/ / /  ;     \      / /\)" << std::endl;
+        std::this_thread::sleep_for(std::chrono::milliseconds(69));
+        std::cout << R"(/ /\ \ |   :  :  | :   |  |   '   , :  :       :    / /\ \)" << std::endl;
+        std::this_thread::sleep_for(std::chrono::milliseconds(69));
+        std::cout << R"(\ \/ / :   |   \ | |   :  '   |  /  :  |   /\   \   \ \/ /)" << std::endl;
+        std::this_thread::sleep_for(std::chrono::milliseconds(69));
+        std::cout << R"( \/ /  |   : '  '; '   '  |   ;  ;  |  :  ' ;.   :   \/ /)" << std::endl;
+        std::this_thread::sleep_for(std::chrono::milliseconds(69));
+        std::cout << R"( / /\  '   ' ;.    |   |  :   '   \ |  |  ;/  \   \  / /\)" << std::endl;
+        std::this_thread::sleep_for(std::chrono::milliseconds(69));
+        std::cout << R"(/ /\ \ |   | | \   '   :  |   |    ''  :  | \  \ ,' / /\ \)" << std::endl;
+        std::this_thread::sleep_for(std::chrono::milliseconds(69));
+        std::cout << R"(\ \/ / '   : |  ; .|   |  '   : |.  |  |  '  '--'   \ \/ /)" << std::endl;
+        std::this_thread::sleep_for(std::chrono::milliseconds(69));
+        std::cout << R"( \/ /  |   | '`--' '   :  |   | '_\.|  :  :          \/ /)" << std::endl;
+        std::this_thread::sleep_for(std::chrono::milliseconds(69));
+        std::cout << R"( / /\  '   : |     ;   |.''   : |   |  | ,'          / /\)" << std::endl;
+        std::this_thread::sleep_for(std::chrono::milliseconds(69));
+        std::cout << R"(/ /\ \ ;   |.'     '---'  ;   |,'   `--''           / /\ \)" << std::endl;
+        std::this_thread::sleep_for(std::chrono::milliseconds(69));
+        std::cout << R"(\ \/ / '---'              '---'                     \ \/ /)" << std::endl;
+        std::this_thread::sleep_for(std::chrono::milliseconds(69));
+        std::cout << R"( \/ /                                                \/ /)" << std::endl;
+        std::this_thread::sleep_for(std::chrono::milliseconds(69));
+        std::cout << R"( / /\.--..--..--..--..--..--..--..--..--..--..--..--./ /\)" << std::endl;
+        std::this_thread::sleep_for(std::chrono::milliseconds(69));
+        std::cout << R"(/ /\ \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \.. \/\ \)" << std::endl;
+        std::this_thread::sleep_for(std::chrono::milliseconds(69));
+        std::cout << R"(\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `'\ `' /)" << std::endl;
+        std::this_thread::sleep_for(std::chrono::milliseconds(69));
+        std::cout << R"( `--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--'`--')" << std::endl;
+        std::cout << "\033[0m"; 
     }
 };
