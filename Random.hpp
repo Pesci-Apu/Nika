@@ -70,7 +70,7 @@ struct Random
         if(cl->FEATURE_QUICKTURN_ON){
             if(display->keyDown(cl->FEATURE_QUICKTURN_BUTTON)){
                 lp->setYaw((localYaw + 180));
-                std::this_thread::sleep_for(std::chrono::milliseconds(200));
+                std::this_thread::sleep_for(std::chrono::milliseconds(300));
             }
         }
     }   
