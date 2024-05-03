@@ -29,7 +29,6 @@ int main() {
             long startTime = util::currentEpochMillis();
 
             if (counter % 20 == 0) cl->reloadFile();
-
             level->readFromMemory();
             if (!level->playable) {
                 printf("Player in Lobby - Sleep 35 sec\n");
@@ -70,6 +69,7 @@ int main() {
             
             //print loop info every now and then
             if (counter % 500 == 0)
+            
                 printf("| [%04d] - Time: %02dms |\n",
                     counter, processingTime);
             //update counter
