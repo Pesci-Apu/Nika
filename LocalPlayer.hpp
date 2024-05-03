@@ -30,7 +30,6 @@ struct LocalPlayer {
     int currentHealth;
     float WeaponProjectileSpeed;
     float WeaponProjectileScale;
-    float local_yaw;
     float worldtime;
     float traversalStartTime;
     float traversalProgress;
@@ -53,7 +52,6 @@ struct LocalPlayer {
         inJump = mem::Read<bool>(OFF_REGION + OFF_IN_JUMP, "LocalPlayer inJump") > 0;
         highlightSettingsPtr = mem::Read<long>( OFF_REGION + OFF_GLOW_HIGHLIGHTS, "LocalPlayer HiglightsSettingPtr");
         localOrigin = mem::Read<Vector3D>(base + OFF_LOCAL_ORIGIN, "LocalPlayer localOrigin");
-        local_yaw = mem::Read<float>(base + OFF_YAW, "LocalPlayer Yaw");
         
         frameCount = mem::Read<int>(OFF_REGION + OFF_GLOBAL_VARS + sizeof(double), "LocalPlayer frameCount");
         worldtime = mem::Read<float>(base + OFFSET_TIME_BASE, "LocalPlayer worldTime");
