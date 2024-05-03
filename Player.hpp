@@ -29,7 +29,6 @@ struct Player {
     bool IsLockedOn;
     Vector2D aimbotDesiredAngles;
     Vector2D aimbotDesiredAnglesIncrement;
-    float view_yaw;
     float aimbotScore;
     uintptr_t nameOffset;
     uintptr_t nameIndex;
@@ -95,7 +94,6 @@ struct Player {
         if (!isPlayer() && !isDummie()) { reset(); return; }
         dead = (isDummie()) ? false : mem::Read<short>(base + OFF_LIFE_STATE, "Player dead") > 0;
         knocked = (isDummie()) ? false : mem::Read<short>(base + OFF_BLEEDOUT_STATE, "Player knocked") > 0;
-        view_yaw = mem::Read<float>(base + OFF_YAW, "Player view_yaw");
         localOrigin = mem::Read<Vector3D>(base + OFF_LOCAL_ORIGIN, "Player localOrigin");
         AbsoluteVelocity = mem::Read<Vector3D>(base + OFF_ABSVELOCITY, "Player AbsoluteVelocity");
         Vector3D localOrigin_diff = localOrigin.Subtract(localOrigin_prev).Normalize().Multiply(20);
