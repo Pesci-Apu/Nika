@@ -121,37 +121,6 @@ struct Random
             }            
         }        
     }
-    void spectatorView()
-    {
-        if(!map->playable) return;
-        int spectatorcount = 0;   
-        std::vector<std::string> spectatorlist;
-        if(cl->FEATURE_SPECTATOR_ON){
-            for (int i = 0; i < players->size(); i++)
-            { 
-                Player *p = players->at(i);          
-                      
-                float targetyaw = p->view_yaw;
-                float localyaw= lp->local_yaw; 
-                //printf("LocalViewYaw: %f == PlayerViewYaw: %f \n", localyaw, targetyaw);
-                if ((targetyaw == localyaw && p->dead) || (targetyaw == localyaw && !p->isValid())){
-                    spectatorcount++;
-                    
-                    std::string namePlayer = p->getPlayerName();    
-                    spectatorlist.push_back(namePlayer);
-                }            
-            }
-            const auto spectatorlist_size = static_cast<int>(spectatorlist.size());
-           
-            if (spectatorcount > 0 && lp->currentHealth >= 0){
-                printf("\n-[%d]-- SPECTATORS -- \n", spectatorcount);
-                for (int i = 0; i < spectatorlist_size; i++) 
-                {   
-                    printf("---[%s]---\n", spectatorlist.at(i).c_str());
-                }
-            }              
-        }      
-    }
     void skinChanger()
     {
         if(!map->playable) return;
@@ -214,7 +183,6 @@ struct Random
         quickTurn();
         mapRadar();
         printLevels();
-        spectatorView();
         skinChanger();
     }
 };
