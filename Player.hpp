@@ -331,4 +331,3 @@ struct Player {
         return BonePosition;
     }
 };
-
