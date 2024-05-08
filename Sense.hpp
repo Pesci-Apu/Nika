@@ -66,7 +66,7 @@ struct Sense {
             return;
         if (!cl->FEATURE_ITEM_GLOW_ON)
             return;
-        for (int highlightId = 30; highlightId < 40; highlightId++) {
+        for (int highlightId = 15; highlightId < 65; highlightId++) {
             const GlowMode newGlowMode = { 137,0,0,127 };
             const GlowMode oldGlowMode = mem::Read<GlowMode>(lp->highlightSettingsPtr + (HIGHLIGHT_TYPE_SIZE * highlightId) + 0, "Player oldGlowMode");
             if (newGlowMode != oldGlowMode)
