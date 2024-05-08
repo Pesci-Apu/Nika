@@ -32,8 +32,8 @@
     constexpr long OFF_SIGNIFIER_NAME = 0x0468; //[RecvTable.DT_BaseEntity]->m_iSignifierName
     constexpr long OFF_LIFE_STATE = 0x0680; //[RecvTable.DT_Player]->m_lifeState
     constexpr long OFF_BLEEDOUT_STATE = 0x26e0; //[RecvTable.DT_Player]->m_bleedoutState
-    constexpr long OFF_LAST_VISIBLE_TIME = 0x198d + 0x3; //[RecvTable.DT_BaseCombatCharacter]->m_hudInfo_visibilityTestAlwaysPasses + 0x3
-    constexpr long OFF_LAST_AIMEDAT_TIME = 0x198d + 0x3 + 0x8; //[RecvTable.DT_BaseCombatCharacter]->m_hudInfo_visibilityTestAlwaysPasses + 0x3 + 0x8
+    constexpr long OFF_LAST_VISIBLE_TIME = 0x198e + 0x3; //[RecvTable.DT_BaseCombatCharacter]->m_hudInfo_visibilityTestAlwaysPasses + 0x3
+    constexpr long OFF_LAST_AIMEDAT_TIME = 0x198e + 0x3 + 0x8; //[RecvTable.DT_BaseCombatCharacter]->m_hudInfo_visibilityTestAlwaysPasses + 0x3 + 0x8
     constexpr long OFF_VIEW_ANGLES = 0x2534 - 0x14; //[DataMap.C_Player]->m_ammoPoolCapacity - 0x14
     constexpr long OFF_PUNCH_ANGLES = 0x2438; //[DataMap.C_Player]->m_currentFrameLocalPlayer.m_vecPunchWeapon_Angle
     constexpr long OFF_BREATH_ANGLES = (OFF_VIEW_ANGLES - 0x10);
