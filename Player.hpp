@@ -144,7 +144,17 @@ struct Player {
         };
         std::array<float, 3> glowColorRGB = { 0, 0, 0 };
         if (isSameTeam) {
-            settingIndex = 20;
+            if (health >= 205) {
+                settingIndex = 66;
+            } else if (health >= 190) {
+                settingIndex = 67;
+            } else if (health >= 170) {
+                settingIndex = 68;
+            } else if (health >= 95) {
+                settingIndex = 69;
+            } else {
+                settingIndex = 70; 
+            }
         } else if (!isVisible) {
             settingIndex = 65;
             glowColorRGB = { 0.5, 0.5, 0.5 }; // knocked enemies // gray color
@@ -331,3 +341,4 @@ struct Player {
         return BonePosition;
     }
 };
+
