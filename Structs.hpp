@@ -1,8 +1,5 @@
 #include <sstream> // for std::stringstream
-
 #pragma once
-
-typedef uint8_t BYTE;
 
 struct Color {
     float red;
@@ -244,26 +241,4 @@ struct GlowMode {
     }
 };
 
-struct colorRGB
-{
-    float r, g, b;
-};
 
-struct glowMode
-{
-    BYTE GeneralGlowMode, BorderGlowMode, BorderSize, TransparentLevel;
-};
-
-struct glowFade
-{
-    int a, b;
-    float c, d, e, f;
-};
-struct Bone {
-    BYTE thing[0xCC];
-    float x;
-    BYTE thing2[0xC];
-    float y;
-    BYTE thing3[0xC];
-    float z;
-};
