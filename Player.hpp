@@ -143,27 +143,7 @@ struct Player {
             64   // (EntityVisible << 6) | State & 0x3F | (AfterPostProcess << 7)
         };
         std::array<float, 3> glowColorRGB = { 0, 0, 0 };
-        if (!isVisible && isSameTeam) {
-            settingIndex = 59;
-            glowColorRGB = { 0.5, 0.5, 0.5 }; // knocked enemies // gray color
-            if (health >= 205) {
-                settingIndex = 60;
-                glowColorRGB = { 1, 0, 0 }; // red shield
-            }else if (health >= 190) {
-                settingIndex = 61;
-                glowColorRGB = { 0.5, 0, 0.5 }; // purple shield
-            }else if (health >= 170) {
-                settingIndex = 62;
-                glowColorRGB = { 0, 0.5, 1 }; // blue shield
-            }else if (health >= 95) {
-                settingIndex = 63;
-                glowColorRGB = { 0, 1, 0.5 }; // gray shield // cyan color
-            }else {
-                settingIndex = 64;
-                glowColorRGB = { 0, 0.5, 0 }; // low health enemies // green color
-            }  
-        }
-        if (!isVisible && !isSameTeam) {
+        if (isSameTeam) {
             settingIndex = 65;
             glowColorRGB = { 0.5, 0.5, 0.5 }; // knocked enemies // gray color
         } else if (health >= 205) {
@@ -180,7 +160,7 @@ struct Player {
             glowColorRGB = { 0, 1, 0.5 }; // gray shield // cyan color
         } else {
             settingIndex = 70;
-            glowColorRGB = { 0, 0.5, 0 }; // low health enemies // green color
+            glowColorRGB = { 0, 1, 0 }; // low health enemies // green color
         }
         
         mem::Write<unsigned char>(basePointer + OFF_GLOW_HIGHLIGHT_ID + contextId, settingIndex);
