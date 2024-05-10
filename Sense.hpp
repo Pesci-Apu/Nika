@@ -17,7 +17,7 @@ struct Sense {
             return;
         if(!cl->FEATURE_SENSE_ON)
             return;
-        for (int i = 0; i < players->size(); i++) {
+        for (std::size_t i = 0; i < players->size(); i++) {
             Player *p = players->at(i);
             if (!p->isValid())
                 continue;
@@ -26,7 +26,7 @@ struct Sense {
                 p->setGlowEnable(1);
                 p->setGlowThroughWall(1);
                 int healthShield = p->currentHealth + p->currentShields;
-                p->setCustomGlow(healthShield, false, true);
+                p->setCustomGlow(0, true, true);
                 continue;
             }
             double distance = math::calculateDistanceInMeters(
@@ -42,7 +42,7 @@ struct Sense {
                 int healthShield = p->currentHealth + p->currentShields;
                 p->setCustomGlow(healthShield, true, false);
             } 
-            else if (!p->visible && !p->knocked && distance < cl->SENSE_MAXRANGE){
+            else if (distance < cl->SENSE_MAXRANGE){
                 p->setGlowEnable(1);
                 p->setGlowThroughWall(1);  
                 int healthShield = p->currentHealth + p->currentShields; 
