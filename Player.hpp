@@ -135,7 +135,7 @@ struct Player {
     {
         static const int contextId = 0; // Same as glow enable
         long basePointer = base;
-        int settingIndex = 65;
+        int settingIndex = 50;
         std::array<unsigned char, 4> highlightFunctionBits = {
             2,   // InsideFunction
             125, // OutlineFunction: HIGHLIGHT_OUTLINE_OBJECTIVE
@@ -143,19 +143,27 @@ struct Player {
             64   // (EntityVisible << 6) | State & 0x3F | (AfterPostProcess << 7)
         };
         std::array<float, 3> glowColorRGB = { 0, 0, 0 };
-        if (isSameTeam) {
+        if (!isVisible && isSameTeam) {
+            settingIndex = 59;
+            glowColorRGB = { 0.5, 0.5, 0.5 }; // knocked enemies // gray color
             if (health >= 205) {
-                settingIndex = 66;
-            } else if (health >= 190) {
-                settingIndex = 67;
-            } else if (health >= 170) {
-                settingIndex = 68;
-            } else if (health >= 95) {
-                settingIndex = 69;
-            } else {
-                settingIndex = 70; 
-            }
-        } else if (!isVisible) {
+                settingIndex = 60;
+                glowColorRGB = { 1, 0, 0 }; // red shield
+            }else if (health >= 190) {
+                settingIndex = 61;
+                glowColorRGB = { 0.5, 0, 0.5 }; // purple shield
+            }else if (health >= 170) {
+                settingIndex = 62;
+                glowColorRGB = { 0, 0.5, 1 }; // blue shield
+            }else if (health >= 95) {
+                settingIndex = 63;
+                glowColorRGB = { 0, 1, 0.5 }; // gray shield // cyan color
+            }else {
+                settingIndex = 64;
+                glowColorRGB = { 0, 0.5, 0 }; // low health enemies // green color
+            }  
+        }
+        if (!isVisible && !isSameTeam) {
             settingIndex = 65;
             glowColorRGB = { 0.5, 0.5, 0.5 }; // knocked enemies // gray color
         } else if (health >= 205) {
@@ -174,6 +182,7 @@ struct Player {
             settingIndex = 70;
             glowColorRGB = { 0, 0.5, 0 }; // low health enemies // green color
         }
+        
         mem::Write<unsigned char>(basePointer + OFF_GLOW_HIGHLIGHT_ID + contextId, settingIndex);
         if (!isSameTeam) {
             mem::Write<typeof(highlightFunctionBits)>(
@@ -181,9 +190,7 @@ struct Player {
             mem::Write<typeof(glowColorRGB)>(
                 lp->highlightSettingsPtr + HIGHLIGHT_TYPE_SIZE * settingIndex + 4, glowColorRGB);
             mem::Write<int>(basePointer + OFF_GLOW_FIX, 0);
-        }
-        
-        
+        }   
     }
     bool isSameTeam()
     {
@@ -341,3 +348,4 @@ struct Player {
         return BonePosition;
     }
 };
+
