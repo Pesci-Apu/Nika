@@ -11,8 +11,7 @@ struct Sense {
         this->lp = localPlayer;
         this->players = all_players;
     }
-
-
+    
     void update(int counter){
         if (!map->playable)
             return;
@@ -27,7 +26,7 @@ struct Sense {
                 p->setGlowEnable(1);
                 p->setGlowThroughWall(1);
                 int healthShield = p->currentHealth + p->currentShields;
-                p->setCustomGlow(healthShield, true, true);
+                p->setCustomGlow(healthShield, false, true);
                 continue;
             }
             double distance = math::calculateDistanceInMeters(
