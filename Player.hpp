@@ -110,7 +110,7 @@ struct Player {
         
         if (lp->isValid()) {
             local = lp->base == base;
-            friendly = isSameTeam();
+            friendly = SameTeam();
             enemy = !friendly;
             distanceToLocalPlayer = lp->localOrigin.Distance(localOrigin);
             distance2DToLocalPlayer = lp->localOrigin.To2D().Distance(localOrigin.To2D());
@@ -143,10 +143,7 @@ struct Player {
             64   // (EntityVisible << 6) | State & 0x3F | (AfterPostProcess << 7)
         };
         std::array<float, 3> glowColorRGB = { 0, 0, 0 };
-        if (isSameTeam) {
-            settingIndex = 65;
-            glowColorRGB = { 0.1, 0.1, 0.1 }; // grey
-        } else if (!isVisible) {
+        if (!isVisible) {
             settingIndex = 65;
             glowColorRGB = { 0.5, 0.5, 0.5 }; // grey
         } else if (health >= 205) {
@@ -166,8 +163,8 @@ struct Player {
             glowColorRGB = { 0, 1, 0 }; // low health enemies // green color
         }
         
-        mem::Write<unsigned char>(basePointer + OFF_GLOW_HIGHLIGHT_ID + contextId, settingIndex);
         if (!isSameTeam) {
+            mem::Write<unsigned char>(basePointer + OFF_GLOW_HIGHLIGHT_ID + contextId, settingIndex);
             mem::Write<typeof(highlightFunctionBits)>(
                 lp->highlightSettingsPtr + HIGHLIGHT_TYPE_SIZE * settingIndex + 0, highlightFunctionBits);
             mem::Write<typeof(glowColorRGB)>(
@@ -175,7 +172,7 @@ struct Player {
             mem::Write<int>(basePointer + OFF_GLOW_FIX, 0);
         }   
     }
-    bool isSameTeam()
+    bool SameTeam()
     {
         if (Map::map_mixtape && lp->squadNumber == -1)
         {
