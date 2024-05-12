@@ -21,14 +21,9 @@ struct Sense {
             Player *p = players->at(i);
             if (!p->isValid())
                 continue;
-            
-            if (p->friendly) {
-                p->setGlowEnable(1);
-                p->setGlowThroughWall(1);
-                int healthShield = p->currentHealth + p->currentShields;
-                p->setCustomGlow(0, true, true);
+            if (p->friendly) 
                 continue;
-            }
+            
             double distance = math::calculateDistanceInMeters(
                 lp->localOrigin.x,
                 lp->localOrigin.y, 
@@ -41,14 +36,11 @@ struct Sense {
                 p->setGlowThroughWall(1);
                 int healthShield = p->currentHealth + p->currentShields;
                 p->setCustomGlow(healthShield, true, false);
-            } 
-           
-            else if (distance <  cl->SENSE_MAXRANGE) {
+            } else if (distance <  cl->SENSE_MAXRANGE) {
                 p->setGlowEnable(1);
                 p->setGlowThroughWall(1);
                 p->setCustomGlow(0, false, false);
-            } 
-            else if (p->getGlowEnable() == 1 && p->getGlowThroughWall() == 1) {
+            } else if (p->getGlowEnable() == 1 && p->getGlowThroughWall() == 1) {
                 p->setGlowEnable(0);
                 p->setGlowThroughWall(0);
             }
