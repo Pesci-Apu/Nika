@@ -4,6 +4,7 @@ constexpr int WEAPON_HANDS = 120;
 constexpr int WEAPON_SENTINEL = 1;
 constexpr int WEAPON_CHARGE_RIFLE = 87;
 constexpr int WEAPON_LONGBOW = 90;
+constexpr int WEAPON_WINGMAN = 114;
 //Shotgun ammo weapons
 constexpr int WEAPON_MOZAMBIQUE = 102;
 constexpr int WEAPON_EVA8 = 93;
@@ -32,7 +33,6 @@ constexpr int WEAPON_LSTAR = 99;
 constexpr int WEAPON_DEVOTION = 89;
 constexpr int WEAPON_HAVOC = 91;
 //Legendary ammo weapons
-constexpr int WEAPON_WINGMAN = 114; 
 constexpr int WEAPON_BOCEK = 2;
 constexpr int WEAPON_KRABER = 98;
 constexpr int WEAPON_THROWING_KNIFE = 173;
