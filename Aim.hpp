@@ -3,7 +3,6 @@
 #include "Player.hpp"
 struct Aim {
     HitboxType Hitbox = HitboxType::Neck;
-
     float FinalDistance = 0;
     float FinalFOV = 0;
     float HipfireDistance = 60;
