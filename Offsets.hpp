@@ -51,7 +51,7 @@ constexpr long OFF_SPECTATOR_LIST = 0x1EADD28; //IDA signtature -> [48 8B 0D ? ?
 // Weapon
 constexpr long OFF_WEAPON_HANDLE = 0x1934; //[RecvTable.DT_BaseCombatCharacter]->m_latestPrimaryWeapons
 constexpr long OFF_WEAPON_INDEX = 0x1778; //[RecvTable.DT_WeaponX]->m_weaponNameIndex
-constexpr long OFFSET_AMMO = 0x1554; //[DataMap.CWeaponX]->m_ammoInClip
+constexpr long OFFSET_AMMO = 0x1580; //[DataMap.CWeaponX]->m_ammoInClip
 constexpr long OFF_GRENADE_HANDLE = 0x1944; //[RecvTable.DT_Player]->m_latestNonOffhandWeapons
 constexpr long OFF_SKIN = 0x0d58; //[RecvTable.DT_BaseAnimating]->m_nSkin
 constexpr long OFF_WEAPON_DISCARDED = 0x1599; //[RecvTable.DT_WeaponX]->m_discarded
