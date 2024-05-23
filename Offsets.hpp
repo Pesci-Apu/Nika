@@ -46,6 +46,7 @@ constexpr long OFF_NAMEINDEX = 0x38; //[RecvTable.DT_BaseEntity]
 constexpr long OFF_XPLEVEL = 0x36a4; //m_xp
 constexpr long OFF_SQUAD_ID = 0x0334; //m_squadID
 constexpr long OFF_GAMEMODE = 0x022921b0; //mp_gamemode
+constexpr long OFF_SPECTATOR_LIST = 0x1EADD28; //IDA signtature -> [48 8B 0D ? ? ? ? 48 85 C9 74 ? 48 8B 01 FF ? ? 48 85 C0 74 ? 48 63 4E 38]
 
 // Weapon
 constexpr long OFF_WEAPON_HANDLE = 0x1934; //[RecvTable.DT_BaseCombatCharacter]->m_latestPrimaryWeapons
