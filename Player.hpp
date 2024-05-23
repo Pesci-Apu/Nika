@@ -20,6 +20,8 @@ struct Player {
     bool enemy;
     int lastTimeAimedAt;
     int lastTimeAimedAtPrev;
+    int plyrDataTable;
+    int spctrIndex;
     bool aimedAt;
     int lastTimeVisible;
     int lastTimeVisiblePrev;
@@ -32,6 +34,8 @@ struct Player {
     float aimbotScore;
     uintptr_t nameOffset;
     uintptr_t nameIndex;
+    uint64_t spectators;
+    uint64_t spctrBase;
 
     Player(int in_index, LocalPlayer* in_localPlayer, ConfigLoader* in_cl) {
         this->index = in_index;
@@ -43,8 +47,7 @@ struct Player {
         base = 0;
     }
     std::string getPlayerName(){
-        nameIndex = mem::Read<uintptr_t>(base + OFF_NAMEINDEX, "Player nameIndex"); 
-        nameOffset = mem::Read<uintptr_t>(OFF_REGION + OFF_NAMELIST + ((nameIndex - 1) * 24 ), "Player nameOffset");
+        nameOffset = mem::Read<uintptr_t>(OFF_REGION + OFF_NAMELIST + ((plyrDataTable - 1) * 24 ), "Player nameOffset");
         std::string playerName = mem::ReadString(nameOffset, 64, "Player playerName");
         return playerName;
     }
@@ -87,6 +90,10 @@ struct Player {
     void readFromMemory() {
         base = mem::Read<uint64_t>(OFF_REGION + OFF_ENTITY_LIST + ((index + 1) << 5), "Player base");
         if (base == 0) return;
+        spctrBase =  mem::Read<uint64_t>(OFF_REGION + OFF_ENTITY_LIST + ((spctrIndex & 0xFFFF) << 5), "Spectator Base");
+        plyrDataTable = mem::Read<int>(base + OFF_NAMEINDEX, "Player Data Table");
+        spectators = mem::Read<uint64_t>(OFF_REGION + OFF_SPECTATOR_LIST, "spectators");
+        spctrIndex = mem::Read<int>(spectators + plyrDataTable * 8 + 0x964, "Spectator Index");
         name = mem::ReadString(base + OFF_NAME, 1024, "Player name");
         teamNumber = mem::Read<int>(base + OFF_TEAM_NUMBER, "Player teamNumber");
         currentHealth = mem::Read<int>(base + OFF_CURRENT_HEALTH, "Player currentHealth");
@@ -103,7 +110,7 @@ struct Player {
         lastTimeAimedAt = mem::Read<int>(base + OFF_LAST_AIMEDAT_TIME, "Player lastTimeAimedAt");
         aimedAt = lastTimeAimedAtPrev < lastTimeAimedAt;
         lastTimeAimedAtPrev = lastTimeAimedAt;
-
+    
         lastTimeVisible = mem::Read<int>(base + OFF_LAST_VISIBLE_TIME, "Player lastTimeVisible");
         visible = isDummie() || aimedAt || lastTimeVisiblePrev < lastTimeVisible; //
         lastTimeVisiblePrev = lastTimeVisible;
@@ -328,4 +335,3 @@ struct Player {
         return BonePosition;
     }
 };
-
