@@ -5,7 +5,7 @@ int main() {
 
     ConfigLoader* cl = new ConfigLoader();
     MyDisplay* display = new MyDisplay();
-    Level* level = new Level();
+    Level* map = new Level();
     LocalPlayer* localPlayer = new LocalPlayer();
     std::vector<Player*>* humanPlayers = new std::vector<Player*>;
     std::vector<Player*>* dummyPlayers = new std::vector<Player*>;
@@ -16,10 +16,10 @@ int main() {
     for (int i = 0; i < 15000; i++) dummyPlayers->push_back(new Player(i, localPlayer, cl));
 
     //create features     
-    NoRecoil* noRecoil = new NoRecoil(cl, display, level, localPlayer);
+    NoRecoil* noRecoil = new NoRecoil(cl, display, map, localPlayer);
     TriggerBot* triggerBot = new TriggerBot(cl, display, localPlayer, players);
-    Sense* sense = new Sense(cl, level, localPlayer, players);
-    Random* random = new Random(cl, display, level, localPlayer, players);
+    Sense* sense = new Sense(cl, map, localPlayer, players);
+    Random* random = new Random(cl, display, map, localPlayer, players);
     Aim* aim = new Aim(display, localPlayer, players, cl);
  
     int counter = 0;
@@ -29,19 +29,19 @@ int main() {
             long startTime = util::currentEpochMillis();
 
             if (counter % 20 == 0) cl->reloadFile();
-            level->readFromMemory();
-            if (!level->playable) {
+            map->readFromMemory();
+            if (!map->playable) {
                 printf("Player in Lobby - Sleep 35 sec\n");
                 std::this_thread::sleep_for(std::chrono::seconds(35));
                 continue;
             }
 
-            localPlayer->readFromMemory();
+            localPlayer->readFromMemory(map);
             if (!localPlayer->isValid()) throw std::invalid_argument("Select Legend");
 
             //read players
             players->clear();
-            if (level->trainingArea)
+            if (map->trainingArea)
                 for (int i = 0; i < dummyPlayers->size(); i++) {
                     Player* p = dummyPlayers->at(i);
                     p->readFromMemory();
