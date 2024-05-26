@@ -40,7 +40,7 @@ struct LocalPlayer {
         base = 0;
     }
 
-    void readFromMemory() {
+    void readFromMemory(Level* map) {
         base = mem::Read<long>(OFF_REGION + OFF_LOCAL_PLAYER, "LocalPlayer base");
         if (base == 0) return;
         dead = mem::Read<short>(base + OFF_LIFE_STATE, "LocalPlayer base") > 0;
@@ -67,7 +67,7 @@ struct LocalPlayer {
         punchAngles = mem::Read<Vector2D>(base + OFF_PUNCH_ANGLES, "LocalPlayer punchAngles");
         punchAnglesDiff = punchAnglesPrev.Subtract(punchAngles);
         punchAnglesPrev = punchAngles;
-        if (!dead && !knocked) {
+        if (!dead && !knocked && map->playable) {
             weaponHandle = mem::Read<long>(base + OFF_WEAPON_HANDLE, "LocalPlayer weaponHandle");
             weaponHandleMasked = weaponHandle & 0xffff;
            
