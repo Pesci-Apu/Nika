@@ -41,6 +41,11 @@ sudo apt-get install libx11-dev
 sudo apt-get install libxtst-dev
 ```
 
+## Intall libxtst-dev For Arch-Linux (Mandatory. Do this once in the Linux Terminal)!!!
+```
+sudo pacman -Sy libudev0 cmake xorg-server git base-devel libx11 libxtst
+```
+
 ### 1. Download Repo:
 ```
 Open Linux terminal then type:
