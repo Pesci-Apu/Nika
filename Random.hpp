@@ -62,7 +62,8 @@ struct Random{
     }
     void quickTurn(){
         if(!map->playable) return;
-        if(lp->dead) return;
+        if(!lp->isValid()) return;
+        if(!lp->dead) return;
         Vector2D localYawtoClamp = lp->viewAngles;
         localYawtoClamp.Clamp();
         float localYaw = localYawtoClamp.y;
