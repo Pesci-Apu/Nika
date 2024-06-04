@@ -1,6 +1,5 @@
 #pragma once
-struct Random
-{
+struct Random{
     ConfigLoader* cl;
     MyDisplay* display;
     Level* map;
@@ -15,10 +14,8 @@ struct Random
         lp = localPlayer;
         players = all_players;
     }
-    
 
-    void superGlide()
-    {
+    void superGlide(){
         if(cl->FEATURE_SUPER_GLIDE_ON){
             static int sgState = 0;
             static int sgFrameTime = 0;
@@ -63,8 +60,9 @@ struct Random
             }
         }
     }
-    void quickTurn()
-    {
+    void quickTurn(){
+        if(!map->playable) return;
+        if(lp->dead) return;
         Vector2D localYawtoClamp = lp->viewAngles;
         localYawtoClamp.Clamp();
         float localYaw = localYawtoClamp.y;
@@ -92,8 +90,7 @@ struct Random
             } 
         }
     }
-    void printLevels()
-    {
+    void printLevels(){
         if(cl->FEATURE_PRINT_LEVELS_ON){
             if(display->keyDown(cl->FEATURE_PRINT_LEVELS_BUTTON)){
                 printf("[N]=[NAME]-[LEVEL]-[LEGEND]\n\n");
@@ -123,15 +120,16 @@ struct Random
             }            
         }        
     }
-    void spectatorView()
-    {
+    void spectatorView(){
         if(!map->playable) return;
+        if(lp->dead) return;
         int spectatorcount = 0;   
         std::vector<std::string> spectatorlist;
         if(cl->FEATURE_SPECTATOR_ON){
             for (int i = 0; i < players->size(); i++)
             { 
-                Player *p = players->at(i);          
+                Player *p = players->at(i);     
+                if(!p->isValid()){}     
                 if (p->spctrBase == lp->base){
                     spectatorcount++;
                     tmpSpectator = spectatorcount;
@@ -151,8 +149,7 @@ struct Random
             }              
         }      
     }
-    void skinChanger()
-    {
+    void skinChanger(){
         if(!map->playable) return;
         if(lp->dead) return;
         float curTime = lp->worldtime;
@@ -206,7 +203,6 @@ struct Random
             mem::Write<int>(lp->weaponEntity + OFF_SKIN, skinID);
         }                    
     }
-    Vector3D oldPunch = { 0.f, 0.f, 0.f };
      
     void runAll(int counter){
         superGlide();
