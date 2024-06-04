@@ -1,4 +1,4 @@
-// Game Version: v.3.0.70.55
+// Game Version: v.3.0.71.58
 #pragma once
 constexpr long OFF_REGION = 0x140000000; //[Static]->Region
 constexpr long OFF_LEVEL = 0x17c7160; //[Miscellaneous]->LevelName
