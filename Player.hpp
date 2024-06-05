@@ -48,9 +48,13 @@ struct Player {
         base = 0;
     }
     std::string getPlayerName(){
-        nameOffset = mem::Read<uintptr_t>(OFF_REGION + OFF_NAMELIST + ((plyrDataTable - 1) * 24 ), "Player nameOffset");
-        std::string playerName = mem::ReadString(nameOffset, 64, "Player playerName");
-        return playerName;
+        if(!isDummie()){
+            uintptr_t nameOffset = mem::Read<uintptr_t>(OFF_REGION + OFF_NAMELIST + ((plyrDataTable - 1) * 24 ), "Player nameOffset");
+            std::string playerName = mem::ReadString(nameOffset, 64, "Player playerName");
+            return playerName;
+        } else {
+            return "Dummie Training Area";
+        }
     }
     std::string getPlayerModelName(){
         uintptr_t modelOffset = mem::Read<uintptr_t>(base + OFF_MODELNAME, "Player OFF_MODELNAME");
