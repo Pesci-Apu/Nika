@@ -18,7 +18,7 @@ struct Color {
 namespace Map{
     bool map_mixtape;
 };
-struct Level {
+struct Level{
 	std::string name;
 	bool playable;
 	bool trainingArea;
@@ -61,23 +61,20 @@ namespace util {
     }
 
     template <typename T>
-    std::string convertNumberToString(const T a_value)
-    {
+    std::string convertNumberToString(const T a_value){
         std::ostringstream out;
         out.precision(6);
         out << std::fixed << a_value;
         return out.str();
     }
     // trim from start (in place)
-    static inline void ltrim(std::string &s)
-    {
+    static inline void ltrim(std::string &s){
         s.erase(s.begin(), std::find_if(s.begin(), s.end(), [](unsigned char ch)
                                         { return !std::isspace(ch); }));
     }
 
     // trim from end (in place)
-    static inline void rtrim(std::string &s)
-    {
+    static inline void rtrim(std::string &s){
         s.erase(std::find_if(s.rbegin(), s.rend(), [](unsigned char ch)
                              { return !std::isspace(ch); })
                     .base(),
@@ -85,40 +82,37 @@ namespace util {
     }
 
     // trim from both ends (in place)
-    static inline void trim(std::string &s)
-    {
+    static inline void trim(std::string &s){
         ltrim(s);
         rtrim(s);
     }
 
-    std::vector<std::string> static inline split(std::string s)
-    {
+    std::vector<std::string> static inline split(std::string s){
         std::stringstream ss(s);
         std::istream_iterator<std::string> begin(ss);
         std::istream_iterator<std::string> end;
         std::vector<std::string> tokens(begin, end);
         return tokens;
     }
-    bool toBool(std::string str)
-    {
+    bool toBool(std::string str){
         std::transform(str.begin(), str.end(), str.begin(), ::tolower);
         std::istringstream is(str);
         bool b;
         is >> std::boolalpha >> b;
         return b;
     }
-    void clearScreen() {
+    void clearScreen(){
         printf("\e[H\e[2J\e[3J");
     }
 };
 
-namespace Conversion {
+namespace Conversion{
     float ToGameUnits(float Meters) {
         return 39.37007874 * Meters;
     }
 };
 
-enum class HitboxType {
+enum class HitboxType{
     Head = 0,
     Neck = 1,
     UpperChest = 2,
@@ -139,7 +133,7 @@ enum class HitboxType {
     RightLeg = 14
 };
 
-struct Matrix3x4 {
+struct Matrix3x4{
 public:
 	float matrix[3][4];
 
@@ -167,8 +161,7 @@ public:
 	}
 };
 
-namespace math
-{
+namespace math{
     double distanceToMeters(float distance)
     {
         const float INCHES_TO_METER_RATE = 39.3701;
