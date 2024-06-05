@@ -14,7 +14,7 @@ struct NoRecoil {
         this->lp = localPlayer;
     }
 
-    void controlWeapon() {
+    void controlWeapon(int counter) {
         noRecPitch = cl->NORECOIL_PITCH_REDUCTION; 
         noRecYaw = cl->NORECOIL_YAW_REDUCTION; 
         if (!cl->FEATURE_NORECOIL_ON)return;
