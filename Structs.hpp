@@ -27,15 +27,18 @@ struct Level {
     std::unordered_map<std::string, bool> mixtape = {{"control", true}, {"freedm", true}, {"arenas", true}};
 
 	void readFromMemory() {
-		uint64_t gameModePtr = mem::Read<uint64_t>(OFF_REGION + OFF_GAMEMODE + 0x50, "gameModePtr");
+		
         name = mem::ReadString(OFF_REGION + OFF_LEVEL, 1024, "Level name");
 		playable = !name.empty() && name != "mp_lobby";
 		trainingArea = name == "mp_rr_canyonlands_staging_mu1";
-        if (gameModePtr > 0){
-            mem::Read(gameModePtr, &gameMode, sizeof(gameMode));
-            mapMixtape=mixtape[gameMode];
-            Map::map_mixtape = mapMixtape;            
-        }
+        if(playable || trainingArea){
+            uint64_t gameModePtr = mem::Read<uint64_t>(OFF_REGION + OFF_GAMEMODE + 0x50, "gameModePtr");
+                if (gameModePtr > 0){
+                mem::Read(gameModePtr, &gameMode, sizeof(gameMode));
+                mapMixtape=mixtape[gameMode];
+                Map::map_mixtape = mapMixtape;            
+            }
+        }  
     }
 };
 
