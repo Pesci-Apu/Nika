@@ -89,32 +89,33 @@ struct Player {
         
         return modelName;
     }
-    void readFromMemory() {
+    void readFromMemory(Level* map) {
         base = mem::Read<uint64_t>(OFF_REGION + OFF_ENTITY_LIST + ((index + 1) << 5), "Player base");
         if (base == 0) return;
-        spctrBase =  mem::Read<uint64_t>(OFF_REGION + OFF_ENTITY_LIST + ((spctrIndex & 0xFFFF) << 5), "Spectator Base");
-        plyrDataTable = mem::Read<int>(base + OFF_NAMEINDEX, "Player Data Table");
-        spectators = mem::Read<uint64_t>(OFF_REGION + OFF_SPECTATOR_LIST, "spectators");
-        spctrIndex = mem::Read<int>(spectators + plyrDataTable * 8 + 0x964, "Spectator Index");
-        name = mem::ReadString(base + OFF_NAME, 1024, "Player name");
-        teamNumber = mem::Read<int>(base + OFF_TEAM_NUMBER, "Player teamNumber");
-        currentHealth = mem::Read<int>(base + OFF_CURRENT_HEALTH, "Player currentHealth");
-        currentShields = mem::Read<int>(base + OFF_CURRENT_SHIELDS, "Player currentShields");
-        if (!isPlayer() && !isDummie()) { reset(); return; }
-        dead = (isDummie()) ? false : mem::Read<short>(base + OFF_LIFE_STATE, "Player dead") > 0;
-        knocked = (isDummie()) ? false : mem::Read<short>(base + OFF_BLEEDOUT_STATE, "Player knocked") > 0;
-        localOrigin = mem::Read<Vector3D>(base + OFF_LOCAL_ORIGIN, "Player localOrigin");
-        AbsoluteVelocity = mem::Read<Vector3D>(base + OFF_ABSVELOCITY, "Player AbsoluteVelocity");
-        Vector3D localOrigin_diff = localOrigin.Subtract(localOrigin_prev).Normalize().Multiply(20);
-        localOrigin_predicted = localOrigin.Add(localOrigin_diff);
-        localOrigin_prev = Vector3D(localOrigin.x, localOrigin.y, localOrigin.z);
-        lastTimeVisible = mem::Read<int>(base + OFF_LAST_VISIBLE_TIME, "Player lastTimeVisible");
-        lastTimeAimedAt = mem::Read<int>(base + OFF_LAST_AIMEDAT_TIME, "Player lastTimeAimedAt");
-        aimedAt = lastTimeAimedAtPrev < lastTimeAimedAt;
-        lastTimeAimedAtPrev = lastTimeAimedAt;
-        visible = isDummie() || isVisible(); //
-        lastTimeVisiblePrev = lastTimeVisible;
-        
+        if(map->playable || map->trainingArea && local){
+            spctrBase =  mem::Read<uint64_t>(OFF_REGION + OFF_ENTITY_LIST + ((spctrIndex & 0xFFFF) << 5), "Spectator Base");
+            plyrDataTable = mem::Read<int>(base + OFF_NAMEINDEX, "Player Data Table");
+            spectators = mem::Read<uint64_t>(OFF_REGION + OFF_SPECTATOR_LIST, "spectators");
+            spctrIndex = mem::Read<int>(spectators + plyrDataTable * 8 + 0x964, "Spectator Index");
+            name = mem::ReadString(base + OFF_NAME, 1024, "Player name");
+            teamNumber = mem::Read<int>(base + OFF_TEAM_NUMBER, "Player teamNumber");
+            currentHealth = mem::Read<int>(base + OFF_CURRENT_HEALTH, "Player currentHealth");
+            currentShields = mem::Read<int>(base + OFF_CURRENT_SHIELDS, "Player currentShields");
+            if (!isPlayer() && !isDummie()) { reset(); return; }
+            dead = (isDummie()) ? false : mem::Read<short>(base + OFF_LIFE_STATE, "Player dead") > 0;
+            knocked = (isDummie()) ? false : mem::Read<short>(base + OFF_BLEEDOUT_STATE, "Player knocked") > 0;
+            localOrigin = mem::Read<Vector3D>(base + OFF_LOCAL_ORIGIN, "Player localOrigin");
+            AbsoluteVelocity = mem::Read<Vector3D>(base + OFF_ABSVELOCITY, "Player AbsoluteVelocity");
+            Vector3D localOrigin_diff = localOrigin.Subtract(localOrigin_prev).Normalize().Multiply(20);
+            localOrigin_predicted = localOrigin.Add(localOrigin_diff);
+            localOrigin_prev = Vector3D(localOrigin.x, localOrigin.y, localOrigin.z);
+            lastTimeVisible = mem::Read<int>(base + OFF_LAST_VISIBLE_TIME, "Player lastTimeVisible");
+            lastTimeAimedAt = mem::Read<int>(base + OFF_LAST_AIMEDAT_TIME, "Player lastTimeAimedAt");
+            aimedAt = lastTimeAimedAtPrev < lastTimeAimedAt;
+            lastTimeAimedAtPrev = lastTimeAimedAt;
+            visible = isDummie() || isVisible(); //
+            lastTimeVisiblePrev = lastTimeVisible;
+        }
         if (lp->isValid()) {
             local = lp->base == base;
             friendly = SameTeam();
