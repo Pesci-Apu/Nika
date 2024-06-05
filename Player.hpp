@@ -25,6 +25,7 @@ struct Player {
     bool aimedAt;
     int lastTimeVisible;
     int lastTimeVisiblePrev;
+    float m_lastVisibleTime;
     bool visible;
     float distanceToLocalPlayer;
     float distance2DToLocalPlayer;
@@ -57,6 +58,7 @@ struct Player {
         // Check for different player names
         if (modelName.find("dummie") != std::string::npos) modelName = "DUMMIE";
         else if (modelName.find("ash") != std::string::npos) modelName = "ASH";
+        else if (modelName.find("alter") != std::string::npos) modelName = "ALTER";
         else if (modelName.find("ballistic") != std::string::npos) modelName = "BALLISTIC";
         else if (modelName.find("bangalore") != std::string::npos) modelName = "BANGALORE";
         else if (modelName.find("bloodhound") != std::string::npos) modelName = "BLOODHOUND";
@@ -106,13 +108,11 @@ struct Player {
         Vector3D localOrigin_diff = localOrigin.Subtract(localOrigin_prev).Normalize().Multiply(20);
         localOrigin_predicted = localOrigin.Add(localOrigin_diff);
         localOrigin_prev = Vector3D(localOrigin.x, localOrigin.y, localOrigin.z);
-
+        lastTimeVisible = mem::Read<int>(base + OFF_LAST_VISIBLE_TIME, "Player lastTimeVisible");
         lastTimeAimedAt = mem::Read<int>(base + OFF_LAST_AIMEDAT_TIME, "Player lastTimeAimedAt");
         aimedAt = lastTimeAimedAtPrev < lastTimeAimedAt;
         lastTimeAimedAtPrev = lastTimeAimedAt;
-    
-        lastTimeVisible = mem::Read<int>(base + OFF_LAST_VISIBLE_TIME, "Player lastTimeVisible");
-        visible = isDummie() || aimedAt || lastTimeVisiblePrev < lastTimeVisible; //
+        visible = isDummie() || isVisible(); //
         lastTimeVisiblePrev = lastTimeVisible;
         
         if (lp->isValid()) {
@@ -176,9 +176,23 @@ struct Player {
                 lp->highlightSettingsPtr + HIGHLIGHT_TYPE_SIZE * settingIndex + 0, highlightFunctionBits);
             mem::Write<typeof(glowColorRGB)>(
                 lp->highlightSettingsPtr + HIGHLIGHT_TYPE_SIZE * settingIndex + 4, glowColorRGB);
-            mem::Write<int>(basePointer + OFF_GLOW_FIX, 0);
+            mem::Write<int>(basePointer + OFF_GLOW_FIX, 2);
         }   
     }
+    float getLastVisibleTime()
+    {
+        long ptrLong = base + OFF_LAST_VISIBLE_TIME;
+        float result = mem::Read<float>(ptrLong, "getLastVisibleTime");
+        return result;
+    }
+    bool isVisible()
+    {
+        const float lastVisibleTime = getLastVisibleTime();
+        const bool isVisible = lastVisibleTime > m_lastVisibleTime;
+        m_lastVisibleTime = lastVisibleTime;
+        return isVisible;
+    }
+
     bool SameTeam()
     {
         if (Map::map_mixtape && lp->squadNumber == -1)
