@@ -83,18 +83,41 @@ struct LocalPlayer {
             WeaponProjectileScale = mem::Read<float>(weaponEntity + OFF_PROJECTILESCALE, "LocalPlayer WeaponProjectileScale");   
         }
     }
-    bool isValid() {
+    bool isValid(){
         return base != 0;
     }
-    bool isCombatReady() {
+    bool isCombatReady(){
         if (base == 0) return false;
         if (dead) return false;
         if (knocked) return false;
         return true;
     }
-    void setYaw(float angle)
-    {
+    void setYaw(float angle){
         long ptrLong = base + OFF_VIEW_ANGLES + sizeof(float);
         mem::Write<float>(ptrLong, angle);
+    }
+    float getPunchPitch(){
+        long ptrLong = base + OFF_PUNCH_ANGLES;
+        float result = mem::Read<float>(ptrLong,"PunchPitch");
+        return result;
+    }
+    float getPunchYaw(){
+        long ptrLong = base + OFF_PUNCH_ANGLES + sizeof(float);
+        float result = mem::Read<float>(ptrLong, "PunchYaw");
+        return result;
+    }
+    float getPitch(){
+        long ptrLong = base + OFF_VIEW_ANGLES;
+        float result = mem::Read<float>(ptrLong, "getPitch");
+        return result;
+    }
+    void setPitch(float angle){
+        long ptrLong = base + OFF_VIEW_ANGLES;
+        mem::Write<float>(ptrLong, angle);
+    }
+    float getYaw() {
+        long ptrLong = base + OFF_VIEW_ANGLES + sizeof(float);
+        float result = mem::Read<float>(ptrLong,"getYaw");
+        return result;
     }
 };
