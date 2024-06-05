@@ -63,7 +63,7 @@ struct Random{
     void quickTurn(){
         if(!map->playable) return;
         if(!lp->isValid()) return;
-        if(!lp->dead) return;
+        if(lp->dead) return;
         Vector2D localYawtoClamp = lp->viewAngles;
         localYawtoClamp.Clamp();
         float localYaw = localYawtoClamp.y;
@@ -75,7 +75,7 @@ struct Random{
             }
         }
     }   
-    void mapRadar() {
+    void mapRadar(){
         if (display->keyDown(cl->FEATURE_MAP_RADAR_BUTTON) && cl->FEATURE_MAP_RADAR_ON) {
             uint64_t pLocal = mem::Read<uint64_t>(OFF_REGION + OFF_LOCAL_PLAYER, "LocalPlayer");
 
