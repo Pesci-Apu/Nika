@@ -21,6 +21,8 @@ int main() {
     Sense* sense = new Sense(cl, map, localPlayer, players);
     Random* random = new Random(cl, display, map, localPlayer, players);
     Aim* aim = new Aim(display, localPlayer, players, cl);
+
+    //Aim* aim = new Aim(display, localPlayer, players, cl);
  
     int counter = 0;
     
@@ -44,23 +46,24 @@ int main() {
             if (map->trainingArea)
                 for (int i = 0; i < dummyPlayers->size(); i++) {
                     Player* p = dummyPlayers->at(i);
-                    p->readFromMemory();
+                    p->readFromMemory(map);
                     if (p->isValid()) players->push_back(p);
                 }
             else
                 for (int i = 0; i < humanPlayers->size(); i++) {
                     Player* p = humanPlayers->at(i);
-                    p->readFromMemory();
+                    p->readFromMemory(map);
                     
                     if (p->isValid()) players->push_back(p);
                 }
                       
-            noRecoil->controlWeapon();
+            //noRecoil->controlWeapon();
             triggerBot->shootAtEnemy(counter);
             sense->update(counter);
             sense->itemGlow(counter);
             aim->update(counter);
             random->runAll(counter);
+            noRecoil->controlWeapon(counter);
             
             int processingTime = static_cast<int>(util::currentEpochMillis() - startTime);
             int goalSleepTime = 6.97; // 16.67ms=60HZ | 6.97ms=144HZ
