@@ -122,7 +122,7 @@ struct Random{
         }        
     }
     void spectatorView(){
-        if(!map->playable) return;
+        if(!map->playable && map->trainingArea) return;
         if(lp->dead) return;
         int spectatorcount = 0;   
         std::vector<std::string> spectatorlist;
