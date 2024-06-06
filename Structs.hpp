@@ -231,5 +231,3 @@ struct GlowMode {
         return !(*this == other);
     }
 };
-
-
