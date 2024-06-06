@@ -10,7 +10,7 @@ int main() {
     std::vector<Player*>* humanPlayers = new std::vector<Player*>;
     std::vector<Player*>* dummyPlayers = new std::vector<Player*>;
     std::vector<Player*>* players = new std::vector<Player*>;
-
+    int spec;
     //fill in slots for players, dummies and items
     for (int i = 0; i < 60; i++) humanPlayers->push_back(new Player(i, localPlayer, cl));
     for (int i = 0; i < 15000; i++) dummyPlayers->push_back(new Player(i, localPlayer, cl));
@@ -19,7 +19,7 @@ int main() {
     NoRecoil* noRecoil = new NoRecoil(cl, display, map, localPlayer);
     TriggerBot* triggerBot = new TriggerBot(cl, display, localPlayer, players);
     Sense* sense = new Sense(cl, map, localPlayer, players);
-    Random* random = new Random(cl, display, map, localPlayer, players);
+    Random* random = new Random(cl, display, map, localPlayer, players, spec);
     Aim* aim = new Aim(display, localPlayer, players, cl);
 
     //Aim* aim = new Aim(display, localPlayer, players, cl);
