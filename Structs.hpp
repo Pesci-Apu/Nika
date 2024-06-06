@@ -12,7 +12,6 @@ struct Color {
         return !(*this == other);
     }
 };
-
 namespace Map{
     bool map_mixtape;
 };
@@ -25,21 +24,25 @@ struct Level{
     std::unordered_map<std::string, bool> mixtape = {{"control", true}, {"freedm", true}, {"arenas", true}};
 
 	void readFromMemory() {
-        if (mem::GetPID() == 0) { std::cout << "OPEN APEX LEGENDS!\n"; return; }
-        name = mem::ReadString(OFF_REGION + OFF_LEVEL, 1024, "Level name");
-		playable = !name.empty() && name != "mp_lobby";
-		trainingArea = name == "mp_rr_canyonlands_staging_mu1";
-        if(playable || trainingArea){
-            uint64_t gameModePtr = mem::Read<uint64_t>(OFF_REGION + OFF_GAMEMODE + 0x50, "gameModePtr");
-                if (gameModePtr > 0){
-                mem::Read(gameModePtr, &gameMode, sizeof(gameMode));
-                mapMixtape=mixtape[gameMode];
-                Map::map_mixtape = mapMixtape;            
+        if (mem::GetPID() != 0) {
+            name = mem::ReadString(OFF_REGION + OFF_LEVEL, 1024, "Level name");
+            playable = !name.empty() && name != "mp_lobby";
+            trainingArea = name == "mp_rr_canyonlands_staging_mu1";
+
+            if (playable || trainingArea) {
+                uint64_t gameModePtr = mem::Read<uint64_t>(OFF_REGION + OFF_GAMEMODE + 0x50, "gameModePtr");
+                if (gameModePtr > 0) {
+                    mem::Read(gameModePtr, &gameMode, sizeof(gameMode));
+                    mapMixtape = mixtape[gameMode];
+                    Map::map_mixtape = mapMixtape;
+                }
             }
-        }  
+        }else{
+            std::cout << "OPEN APEX LEGENDS!\n";
+            return;
+        }
     }
 };
-
 namespace util {
     float metersToGameUnits(float meters) {
         return 39.37007874 * meters;
@@ -103,13 +106,11 @@ namespace util {
         printf("\e[H\e[2J\e[3J");
     }
 };
-
 namespace Conversion{
     float ToGameUnits(float Meters) {
         return 39.37007874 * Meters;
     }
 };
-
 enum class HitboxType{
     Head = 0,
     Neck = 1,
@@ -130,7 +131,6 @@ enum class HitboxType{
     RightKnees = 17,
     RightLeg = 14
 };
-
 struct Matrix3x4{
 public:
 	float matrix[3][4];
@@ -143,7 +143,6 @@ public:
 		return Vector3D(matrix[0][3], matrix[1][3], matrix[2][3]);
 	}
 };
-
 struct ViewMatrix {
 public:
 	float matrix[4][4];
@@ -158,7 +157,6 @@ public:
 		return transformed;
 	}
 };
-
 namespace math{
     double distanceToMeters(float distance)
     {
@@ -188,7 +186,6 @@ namespace math{
     }
 
 };
-
 struct GlowMode {
     std::byte bodyStyle, borderStyle, borderWidth, transparency;
 
