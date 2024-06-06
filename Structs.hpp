@@ -1,6 +1,4 @@
-#include <sstream> // for std::stringstream
 #pragma once
-
 struct Color {
     float red;
     float green;
@@ -27,7 +25,7 @@ struct Level{
     std::unordered_map<std::string, bool> mixtape = {{"control", true}, {"freedm", true}, {"arenas", true}};
 
 	void readFromMemory() {
-		
+        if (mem::GetPID() == 0) { std::cout << "OPEN APEX LEGENDS!\n"; return; }
         name = mem::ReadString(OFF_REGION + OFF_LEVEL, 1024, "Level name");
 		playable = !name.empty() && name != "mp_lobby";
 		trainingArea = name == "mp_rr_canyonlands_staging_mu1";
