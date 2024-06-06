@@ -7,13 +7,12 @@ struct Random{
     std::vector<Player*>* players;
     int tmpSpectator;
 
-    Random(ConfigLoader* configLoada, MyDisplay* myDisplay, Level* level, LocalPlayer* localPlayer, std::vector<Player*>* all_players, int tmpSpec){
+    Random(ConfigLoader* configLoada, MyDisplay* myDisplay, Level* level, LocalPlayer* localPlayer, std::vector<Player*>* all_players){
         cl = configLoada;
         display = myDisplay;
         map = level;
         lp = localPlayer;
         players = all_players;
-        tmpSpectator = tmpSpec;
     }
 
     void superGlide(){
