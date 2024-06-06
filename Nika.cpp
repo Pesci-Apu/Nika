@@ -19,7 +19,7 @@ int main() {
     NoRecoil* noRecoil = new NoRecoil(cl, display, map, localPlayer);
     TriggerBot* triggerBot = new TriggerBot(cl, display, localPlayer, players);
     Sense* sense = new Sense(cl, map, localPlayer, players);
-    Random* random = new Random(cl, display, map, localPlayer, players, spec);
+    Random* random = new Random(cl, display, map, localPlayer, players);
     Aim* aim = new Aim(display, localPlayer, players, cl);
 
     //Aim* aim = new Aim(display, localPlayer, players, cl);
