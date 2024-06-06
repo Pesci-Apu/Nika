@@ -5,14 +5,15 @@ struct Random{
     Level* map;
     LocalPlayer* lp;
     std::vector<Player*>* players;
-    int tmpSpectator = 0;
+    int tmpSpectator;
 
-    Random(ConfigLoader* configLoada, MyDisplay* myDisplay, Level* level, LocalPlayer* localPlayer, std::vector<Player*>* all_players){
+    Random(ConfigLoader* configLoada, MyDisplay* myDisplay, Level* level, LocalPlayer* localPlayer, std::vector<Player*>* all_players, int tmpSpec){
         cl = configLoada;
         display = myDisplay;
         map = level;
         lp = localPlayer;
         players = all_players;
+        tmpSpectator = tmpSpec;
     }
 
     void superGlide(){
@@ -125,7 +126,8 @@ struct Random{
         if(!map->playable && map->trainingArea) return;
         if(lp->dead) return;
         int spectatorcount = 0;   
-        std::vector<std::string> spectatorlist;
+        std::vector<std::string> spectatorList;
+        std::vector<std::string> modelName;
         if(cl->FEATURE_SPECTATOR_ON){
             for (int i = 0; i < players->size(); i++)
             { 
@@ -135,17 +137,19 @@ struct Random{
                     spectatorcount++;
                     tmpSpectator = spectatorcount;
                     
-                    std::string namePlayer = p->getPlayerName();    
-                    spectatorlist.push_back(namePlayer);
+                    std::string playerName = p->getPlayerName();
+                    std::string modelNameIndex = p->getPlayerModelName();    
+                    spectatorList.push_back(playerName);
+                    modelName.push_back(modelNameIndex);
                 }            
             }
-            const auto spectatorlist_size = static_cast<int>(spectatorlist.size());
+            const auto spectatorlist_size = static_cast<int>(spectatorList.size());
            
             if (spectatorcount > 0){
                 printf("\n-[%d]-- SPECTATORS -- \n", spectatorcount);
                 for (int i = 0; i < spectatorlist_size; i++) 
                 {   
-                    printf("---[%s]---\n", spectatorlist.at(i).c_str());
+                    printf("---[%s]----[%s]\n", spectatorList.at(i).c_str(), modelName.at(i).c_str());
                 }
             }              
         }      
