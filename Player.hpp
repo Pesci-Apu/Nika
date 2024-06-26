@@ -100,7 +100,7 @@ struct Player {
             spctrBase =  mem::Read<uint64_t>(OFF_REGION + OFF_ENTITY_LIST + ((spctrIndex & 0xFFFF) << 5), "Spectator Base");
             plyrDataTable = mem::Read<int>(base + OFF_NAMEINDEX, "Player Data Table");
             spectators = mem::Read<uint64_t>(OFF_REGION + OFF_SPECTATOR_LIST, "spectators");
-            spctrIndex = mem::Read<int>(spectators + plyrDataTable * 8 + 0x964, "Spectator Index");
+            spctrIndex = mem::Read<int>(spectators + plyrDataTable * 8 + 0x974, "Spectator Index");
             name = mem::ReadString(base + OFF_NAME, 1024, "Player name");
             teamNumber = mem::Read<int>(base + OFF_TEAM_NUMBER, "Player teamNumber");
             currentHealth = mem::Read<int>(base + OFF_CURRENT_HEALTH, "Player currentHealth");
