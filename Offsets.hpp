@@ -6,7 +6,6 @@ constexpr long OFF_LOCAL_PLAYER = 0x23e7ff8; //[Miscellaneous]->LocalPlayer
 constexpr long OFF_ENTITY_LIST = 0x1f14e08; //[Miscellaneous]->cl_entitylist
 constexpr long OFF_GLOBAL_VARS = 0x17eaf90; //[Miscellaneous]->GlobalVars
 constexpr long OFF_NAMELIST = 0xd34f2c0; //[Miscellaneous]->NameList
-
 // Buttons
 constexpr long OFF_IN_ATTACK = 0x0769a4f8; //[Buttons]->in_attack
 constexpr long OFF_IN_JUMP = 0x0769a5f0; //[Buttons]->in_jump
