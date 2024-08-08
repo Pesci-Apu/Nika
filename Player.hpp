@@ -190,6 +190,17 @@ struct Player {
         float result = mem::Read<float>(ptrLong, "getLastVisibleTime");
         return result;
     }
+    bool IsSpectating() {
+        if (!dead)
+            return false;
+        uint64_t SpectatorList = mem::Read<uint64_t>(OFF_REGION + OFF_SPECTATOR_LIST, "SpectatorList");
+        int PlayerData = mem::Read<int>(base + 0x38, "playerData");
+        int SpecIndex = mem::Read<int>(SpectatorList + PlayerData * 8 + 0x974, "spectatorIndex");
+        uint64_t SpectatorAddr = mem::Read<uint64_t>(OFF_REGION + OFF_ENTITY_LIST + ((SpecIndex & 0xFFFF) << 5), "spectator Addy");
+        if (SpectatorAddr == lp->base)
+            return true;
+        return false;
+    }
     bool isVisible()
     {
         const float lastVisibleTime = getLastVisibleTime();
