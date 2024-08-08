@@ -130,16 +130,15 @@ struct Random{
         if(cl->FEATURE_SPECTATOR_ON){
             for (int i = 0; i < players->size(); i++)
             { 
-                Player *p = players->at(i);     
-                if(!p->isValid()){}     
-                if (p->spctrBase == lp->base){
+                Player *p = players->at(i);         
+                if (p->IsSpectating()){
                     spectatorcount++;
                     tmpSpectator = spectatorcount;
                     
                     std::string playerName = p->getPlayerName();
                     std::string modelNameIndex = p->getPlayerModelName();    
-                    spectatorList.push_back(playerName);
-                    modelName.push_back(modelNameIndex);
+                    spectatorList.push_back(p->getPlayerName());
+                    //modelName.push_back(modelNameIndex);
                 }            
             }
             const auto spectatorlist_size = static_cast<int>(spectatorList.size());
@@ -148,7 +147,7 @@ struct Random{
                 printf("\n-[%d]-- SPECTATORS -- \n", spectatorcount);
                 for (int i = 0; i < spectatorlist_size; i++) 
                 {   
-                    printf("---[%s]----[%s]\n", spectatorList.at(i).c_str(), modelName.at(i).c_str());
+                    printf("---[%s]---\n", spectatorList.at(i).c_str());
                 }
             }              
         }      
