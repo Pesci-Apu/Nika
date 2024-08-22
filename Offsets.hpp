@@ -4,7 +4,7 @@ constexpr long OFF_REGION = 0x140000000;    //[Static]->Region
 constexpr long OFF_LEVEL = 0x17ec544;       //[Miscellaneous]->LevelName
 constexpr long OFF_LOCAL_PLAYER = 0x23e91f8;//[Miscellaneous]->LocalPlayer
 constexpr long OFF_ENTITY_LIST = 0x1f15f88; //[Miscellaneous]->cl_entitylist
-constexpr long OFF_GLOBAL_VARS = 0x17ebf90; //[Miscellaneous]->GlobalVars
+constexpr long OFF_GLOBAL_VARS = 0x17ec040; //[Miscellaneous]->GlobalVars
 constexpr long OFF_NAMELIST = 0xd350450;    //[Miscellaneous]->NameList
 
 // Buttons
@@ -47,7 +47,7 @@ constexpr long OFF_YAW = 0x223c - 0x8;;      //[DataMap.C_Player]=>m_currentFram
 constexpr long OFF_NAMEINDEX = 0x38;         //[RecvTable.DT_BaseEntity]
 constexpr long OFF_XPLEVEL = 0x3724;         //m_xp
 constexpr long OFF_SQUAD_ID = 0x0344;        //m_squadID
-constexpr long OFF_GAMEMODE = 0x02421110;    //mp_gamemode
+constexpr long OFF_GAMEMODE = 0x02421250;    //mp_gamemode
 constexpr long OFF_SPECTATOR_LIST = 0x1f17fa8; //IDA signtature -> [48 8B 0D ? ? ? ? 48 85 C9 74 ? 48 8B 01 FF ? ? 48 85 C0 74 ? 48 63 4E 38]
 constexpr long OFF_SPECTATOR_LIST_ARRAY = 0x974; 
 
