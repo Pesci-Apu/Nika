@@ -1,11 +1,11 @@
-// Game Version: v.3.0.78.32
+// Game Version: v 3.0.79.44
 #pragma once
 constexpr long OFF_REGION = 0x140000000;    //[Static]->Region
 constexpr long OFF_LEVEL = 0x17ec544;       //[Miscellaneous]->LevelName
 constexpr long OFF_LOCAL_PLAYER = 0x23e91f8;//[Miscellaneous]->LocalPlayer
 constexpr long OFF_ENTITY_LIST = 0x1f15f88; //[Miscellaneous]->cl_entitylist
 constexpr long OFF_GLOBAL_VARS = 0x17ec040; //[Miscellaneous]->GlobalVars
-constexpr long OFF_NAMELIST = 0xd350450;    //[Miscellaneous]->NameList
+constexpr long OFF_NAMELIST = 0xd388450;    //[Miscellaneous]->NameList
 
 // Buttons
 constexpr long OFF_IN_ATTACK = 0x0769b658;  //[Buttons]->in_attack
