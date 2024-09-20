@@ -4,13 +4,15 @@ namespace mem {
 
     pid_t GetPID() {
         if (m_pid > 0) return m_pid;
-        char buf[512];
-        FILE* cmd_pipe = popen("pidof -s r5apex.exe", "r");
-        fgets(buf, 512, cmd_pipe);
-        pid_t pid = strtoul(buf, NULL, 10);
-        pclose(cmd_pipe);
-        m_pid = pid;
-        return pid;
+
+        for (const auto& entry : std::filesystem::directory_iterator("/proc")) {
+            std::ifstream cmd_file(entry.path() / "cmdline");
+            std::string cmd_line;
+            if (cmd_file && std::getline(cmd_file, cmd_line) && cmd_line.find("r5apex.exe") != std::string::npos) {
+                return m_pid = std::stoi(entry.path().filename().string());
+            }
+        }
+        return 0;
     }
     bool IsValidPointer(long Pointer) {
         return Pointer > 0x00010000 && Pointer < 0x7FFFFFFEFFFF;
