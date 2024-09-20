@@ -3,10 +3,11 @@
 #include <limits>
 #include <cstdint>
 #include <sstream>
-#include <math.h>
+#include <filesystem>
+#include <fstream>
+#include <string>
 #include <cstring>
 #include <iostream>
-#include <string>
 #include <unistd.h>
 #include <vector>
 #include <unordered_map>
@@ -18,7 +19,6 @@
 #include <X11/Xutil.h>
 #include <X11/extensions/XTest.h>
 #include <random>
-#include <fstream>
 #include <sys/stat.h>
 #include <sys/uio.h>
 #include <cctype>
