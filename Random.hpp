@@ -158,49 +158,48 @@ struct Random{
         float curTime = lp->worldtime;
         float endTime = curTime +5.5;
         std::map<int, std::vector<int>> weaponSkinMap;
-        //Light ammo weapons
-        weaponSkinMap[105] = { 6 };   //WEAPON_P2020 
-        weaponSkinMap[81] = { 6 };   //WEAPON_RE45 
-        weaponSkinMap[80] = { 11 };   //WEAPON_ALTERNATOR 
-        weaponSkinMap[104] = { 2 };   //WEAPON_R99  
-        weaponSkinMap[0] = { 10 };     //WEAPON_R301   
-        weaponSkinMap[106] = { 2 };    //WEAPON_SPITFIRE 
-        weaponSkinMap[89] = { 5 };    //WEAPON_G7 
-        //Heavy ammo weapons
-        weaponSkinMap[112] = { 10};   // Car-SMG 
-        weaponSkinMap[21] = { 6 };    // Rampage 
-        weaponSkinMap[111] = { 9 };      //3030 
-        weaponSkinMap[90] = {10 };   //WEAPON_HEMLOCK  
-        weaponSkinMap[88] = { 8 };    //FlatLine  
-        //Energy ammo weapons
-        weaponSkinMap[113] = { 8 };    //WEAPON_NEMESIS  
-        weaponSkinMap[110] = { 9 };    //WEAPON_VOLT 
-        weaponSkinMap[107] = { 7 };    //WEAPON_TRIPLE_TAKE 
-        weaponSkinMap[93] = { 3 };    //WEAPON_LSTAR 
-        weaponSkinMap[84] = { 5 };    //WEAPON_DEVOTION 
-        weaponSkinMap[86] = { 8 };    //WEAPON_HAVOC 
         //Sniper ammo weapons
-        weaponSkinMap[1] = { 5 };    //WEAPON_SENTINEL 
-        weaponSkinMap[83] = { 8 };    //WEAPON_CHARGE_RIFLE 
-        weaponSkinMap[85] = { 7 };    //WEAPON_LONGBOW 
+        weaponSkinMap[1] = { 11 };    //WEAPON_SENTINEL 
+        weaponSkinMap[87] = { 8 };    //WEAPON_CHARGE_RIFLE 
+        weaponSkinMap[90] = { 7 };    //WEAPON_LONGBOW 
+        weaponSkinMap[115] = { 12 };    //WEAPON_WINGMAN 
         //Shotgun ammo weapons
-        weaponSkinMap[96] = { 5 };    //WEAPON_MOZAMBIQUE 
-        weaponSkinMap[87] = { 8 };    //WEAPON_EVA8 
-        weaponSkinMap[103] = { 7 };    //WEAPON_PEACEKEEPER 
-        weaponSkinMap[95] = { 5 };    //WEAPON_MASTIFF 
+        weaponSkinMap[102] = { 9 };    //WEAPON_MOZAMBIQUE 
+        weaponSkinMap[92] = { 8 };    //WEAPON_EVA8 
+        weaponSkinMap[109] = { 16 };    //WEAPON_PEACEKEEPER 
+        weaponSkinMap[101] = { 15 };    //WEAPON_MASTIFF
+        //Light ammo weapons
+        weaponSkinMap[112] = { 11 };   //WEAPON_P2020 
+        weaponSkinMap[85] = { 16 };   //WEAPON_RE45 
+        weaponSkinMap[84] = { 17 };   //WEAPON_ALTERNATOR 
+        weaponSkinMap[0] = { 19 };     //WEAPON_R301   
+        weaponSkinMap[113] = { 12 };    //WEAPON_SPITFIRE 
+        weaponSkinMap[95] = { 12 };    //WEAPON_G7 
+        //Heavy ammo weapons
+        weaponSkinMap[119] = { 6};   // Car-SMG 
+        weaponSkinMap[6] = { 6 };    // Rampage 
+        weaponSkinMap[118] = { 7 };      //3030 
+        weaponSkinMap[96] = {7 };   //WEAPON_HEMLOCK 
+        weaponSkinMap[94] = { 3 };    //FlatLine  
+        weaponSkinMap[107] = { 17 };    //WEAPON_PROWLER     
+        //Energy ammo weapons
+        weaponSkinMap[120] = { 8 };    //WEAPON_NEMESIS  
+        weaponSkinMap[117] = { 9 };    //WEAPON_VOLT 
+        weaponSkinMap[114] = { 7 };    //WEAPON_TRIPLE_TAKE 
+        weaponSkinMap[99] = { 13 };    //WEAPON_LSTAR 
+        weaponSkinMap[91] = { 8 };    //WEAPON_HAVOC  
         //Legendary ammo weapons
-        weaponSkinMap[109] = { 5 };    //WEAPON_WINGMAN 
-        weaponSkinMap[102] = { 7 };    //WEAPON_PROWLER
-        weaponSkinMap[2] = { 3 };    //WEAPON_BOCEK
-        weaponSkinMap[92] = { 6 };    //WEAPON_KRABER
-        weaponSkinMap[163] = { 3 };    //WEAPON_THROWING_KNIFE
-        weaponSkinMap[164] = { 2 };    //WEAPON_THERMITE_GRENADE 
-        weaponSkinMap[3] = { 2 };    //WEAPON_BUSTER_SWORD_R25 
+        weaponSkinMap[111] = { 14 };   //WEAPON_R99
+        weaponSkinMap[89] = { 2 };    //WEAPON_DEVOTION 
+        weaponSkinMap[2] = { 8 };    //WEAPON_BOCEK
+        weaponSkinMap[98] = { 4 };    //WEAPON_KRABER
+        weaponSkinMap[176] = { 3 };    //WEAPON_THROWING_KNIFE
+        
 
         if (cl->FEATURE_SKINCHANGER_ON){
-            int waponIndex = lp->weaponIndex;
-            if (weaponSkinMap.count(waponIndex) == 0) return;
-            int skinID = weaponSkinMap[waponIndex][0];
+            int weaponIndex = lp->weaponIndex;
+            if (weaponSkinMap.count(weaponIndex) == 0) return;
+            int skinID = weaponSkinMap[weaponIndex][0];
             //printf("Weapon: %s Activated Skin ID: %d \n", WeaponName(waponIndex).c_str(), skinID);  
             mem::Write<int>(lp->base + OFF_SKIN, skinID+1);
             mem::Write<int>(lp->weaponEntity + OFF_SKIN, skinID);
